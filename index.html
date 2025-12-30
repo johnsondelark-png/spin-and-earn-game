@@ -11,7 +11,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 /* Header */
 .header { background: rgba(255,255,255,0.95); padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
 .header h1 { color: #667eea; font-size: 24px; }
-.balance { background: #51cf66; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
+.balance { background: #51cf66; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; }
 
 /* Container */
 .container { max-width: 600px; margin: 20px auto; padding: 20px; }
@@ -32,6 +32,19 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 .stat-card h3 { color: #666; font-size: 14px; margin-bottom: 10px; }
 .stat-card .value { font-size: 28px; font-weight: bold; color: #667eea; }
 
+/* Withdrawal Section */
+.withdrawal { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
+.withdrawal h2 { margin-bottom: 20px; color: #333; }
+.min-withdrawal { background: #fff3cd; padding: 12px; border-radius: 8px; margin-bottom: 20px; color: #856404; text-align: center; font-weight: 600; }
+.payment-methods { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px; }
+.payment-method { border: 2px solid #ddd; padding: 20px; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.3s; }
+.payment-method:hover { border-color: #667eea; transform: scale(1.05); }
+.payment-method.active { border-color: #667eea; background: #f0f4ff; }
+.payment-method img { width: 60px; height: 60px; margin-bottom: 10px; }
+.withdraw-btn { background: #51cf66; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+.withdraw-btn:hover { background: #40c057; }
+.withdraw-btn:disabled { background: #ccc; cursor: not-allowed; }
+
 /* Tasks */
 .tasks { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
 .tasks h2 { margin-bottom: 15px; color: #333; }
@@ -44,14 +57,17 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 .history h2 { margin-bottom: 15px; color: #333; }
 .history-item { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #f0f0f0; }
 .amount-won { color: #51cf66; font-weight: bold; }
+.amount-withdrawn { color: #ff6b6b; font-weight: bold; }
 
 /* Modal */
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
 .modal.active { display: flex; }
-.modal-content { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 400px; animation: modalPop 0.3s; }
+.modal-content { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 400px; width: 90%; animation: modalPop 0.3s; }
 @keyframes modalPop { from { transform: scale(0.5); } to { transform: scale(1); } }
 .modal h2 { color: #51cf66; font-size: 32px; margin-bottom: 20px; }
+.modal input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
 .modal-close { background: #667eea; color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; margin-top: 20px; font-size: 16px; }
+.modal-btn { background: #51cf66; color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; margin: 10px 5px; font-size: 16px; }
 
 /* Admin Button */
 .admin-btn { position: fixed; bottom: 20px; right: 20px; background: #ff6b6b; color: white; border: none; padding: 15px 25px; border-radius: 50px; cursor: pointer; box-shadow: 0 5px 15px rgba(255,107,107,0.4); font-weight: bold; }
@@ -59,6 +75,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 @media (max-width: 600px) {
   .wheel { width: 250px; height: 250px; }
   .container { padding: 10px; }
+  .payment-methods { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -66,7 +83,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 
 <div class="header">
   <h1>🎰 Spin & Earn</h1>
-  <div class="balance">₹<span id="balance">0</span></div>
+  <div class="balance" onclick="showWithdrawal()">₹<span id="balance">0</span></div>
 </div>
 
 <div class="container">
@@ -77,13 +94,46 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
       <div class="value">₹<span id="totalEarnings">0</span></div>
     </div>
     <div class="stat-card">
-      <h3>Today's Spins</h3>
-      <div class="value"><span id="todaySpins">0</span></div>
+      <h3>Withdrawn</h3>
+      <div class="value">₹<span id="totalWithdrawn">0</span></div>
     </div>
   </div>
 
+  <!-- Withdrawal Section -->
+  <div class="withdrawal" id="withdrawalSection" style="display: none;">
+    <h2>💰 Withdraw Money</h2>
+    <div class="min-withdrawal">⚠️ Minimum withdrawal: ₹10</div>
+    
+    <div class="payment-methods">
+      <div class="payment-method active" onclick="selectPayment('paytm')" id="paytm">
+        <div style="font-size: 40px;">📱</div>
+        <strong>Paytm</strong>
+      </div>
+      <div class="payment-method" onclick="selectPayment('upi')" id="upi">
+        <div style="font-size: 40px;">💳</div>
+        <strong>UPI</strong>
+      </div>
+      <div class="payment-method" onclick="selectPayment('bank')" id="bank">
+        <div style="font-size: 40px;">🏦</div>
+        <strong>Bank</strong>
+      </div>
+      <div class="payment-method" onclick="selectPayment('phonepe')" id="phonepe">
+        <div style="font-size: 40px;">📲</div>
+        <strong>PhonePe</strong>
+      </div>
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+      <label style="display: block; margin-bottom: 8px; color: #666; font-weight: 600;">Amount to Withdraw</label>
+      <input type="number" id="withdrawAmount" placeholder="Enter amount (Min ₹10)" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+    </div>
+    
+    <button class="withdraw-btn" onclick="processWithdrawal()">💸 Withdraw Now</button>
+    <button class="withdraw-btn" onclick="hideWithdrawal()" style="background: #ccc; margin-top: 10px;">Cancel</button>
+  </div>
+
   <!-- Spin Wheel -->
-  <div class="wheel-container">
+  <div class="wheel-container" id="wheelSection">
     <h2>🎡 Spin the Wheel!</h2>
     <div style="position: relative;">
       <div class="pointer"></div>
@@ -130,11 +180,11 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 
   <!-- History -->
   <div class="history">
-    <h2>📊 Recent Wins</h2>
+    <h2>📊 Transaction History</h2>
     <div id="historyList">
       <div class="history-item">
-        <span>Spin #1</span>
-        <span class="amount-won">+₹20</span>
+        <span>Welcome Bonus</span>
+        <span class="amount-won">+₹0</span>
       </div>
     </div>
   </div>
@@ -149,28 +199,53 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   </div>
 </div>
 
+<!-- Payment Details Modal -->
+<div class="modal" id="paymentModal">
+  <div class="modal-content">
+    <h2>💳 Enter Payment Details</h2>
+    <div id="paymentForm"></div>
+    <button class="modal-btn" onclick="confirmWithdrawal()">Confirm</button>
+    <button class="modal-close" onclick="closePaymentModal()">Cancel</button>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal" id="successModal">
+  <div class="modal-content">
+    <h2>✅ Success!</h2>
+    <p style="font-size: 18px; margin: 20px 0;">₹<span id="successAmount">0</span> has been sent to your account!</p>
+    <p style="color: #666; font-size: 14px;">Transaction ID: <strong><span id="txnId"></span></strong></p>
+    <button class="modal-close" onclick="closeSuccessModal()">Done</button>
+  </div>
+</div>
+
 <!-- Admin Button -->
 <button class="admin-btn" onclick="window.location.href='?admin=true'">⚙️ Admin</button>
 
 <script>
 let balance = 0;
 let totalEarnings = 0;
+let totalWithdrawn = 0;
 let todaySpins = 0;
 let spinsLeft = 5;
 let spinning = false;
 let history = [];
+let selectedPayment = 'paytm';
 
 const prizes = [100, 5, 20, 50, 10, 2, 15, 30];
 
 function updateUI() {
   document.getElementById('balance').textContent = balance;
   document.getElementById('totalEarnings').textContent = totalEarnings;
-  document.getElementById('todaySpins').textContent = todaySpins;
+  document.getElementById('totalWithdrawn').textContent = totalWithdrawn;
   document.getElementById('spinsLeft').textContent = spinsLeft;
 }
 
 function spin() {
-  if (spinning || spinsLeft <= 0) return;
+  if (spinning || spinsLeft <= 0) {
+    alert('❌ No spins left! Watch ads or complete tasks to earn more spins.');
+    return;
+  }
   
   spinning = true;
   spinsLeft--;
@@ -189,7 +264,7 @@ function spin() {
     balance += wonAmount;
     totalEarnings += wonAmount;
     
-    history.unshift({ spin: todaySpins, amount: wonAmount });
+    history.unshift({ type: 'win', spin: todaySpins, amount: wonAmount, time: new Date().toLocaleTimeString() });
     updateHistory();
     
     document.getElementById('winAmount').textContent = wonAmount;
@@ -207,11 +282,13 @@ function updateHistory() {
   const historyList = document.getElementById('historyList');
   historyList.innerHTML = '';
   
-  history.slice(0, 10).forEach(item => {
+  history.slice(0, 20).forEach(item => {
+    const amountClass = item.type === 'win' ? 'amount-won' : 'amount-withdrawn';
+    const sign = item.type === 'win' ? '+' : '-';
     historyList.innerHTML += `
       <div class="history-item">
-        <span>Spin #${item.spin}</span>
-        <span class="amount-won">+₹${item.amount}</span>
+        <span>${item.type === 'win' ? 'Spin #' + item.spin : item.method} - ${item.time}</span>
+        <span class="${amountClass}">${sign}₹${item.amount}</span>
       </div>
     `;
   });
@@ -221,15 +298,124 @@ function closeModal() {
   document.getElementById('winModal').classList.remove('active');
 }
 
+function showWithdrawal() {
+  document.getElementById('withdrawalSection').style.display = 'block';
+  document.getElementById('wheelSection').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function hideWithdrawal() {
+  document.getElementById('withdrawalSection').style.display = 'none';
+  document.getElementById('wheelSection').style.display = 'block';
+}
+
+function selectPayment(method) {
+  document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('active'));
+  document.getElementById(method).classList.add('active');
+  selectedPayment = method;
+}
+
+function processWithdrawal() {
+  const amount = parseInt(document.getElementById('withdrawAmount').value);
+  
+  if (!amount || amount < 10) {
+    alert('❌ Minimum withdrawal amount is ₹10');
+    return;
+  }
+  
+  if (amount > balance) {
+    alert('❌ Insufficient balance!');
+    return;
+  }
+  
+  // Show payment details form
+  let formHTML = '';
+  if (selectedPayment === 'paytm') {
+    formHTML = '<input type="tel" id="paymentDetail" placeholder="Enter Paytm Mobile Number" maxlength="10" style="width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">';
+  } else if (selectedPayment === 'upi') {
+    formHTML = '<input type="text" id="paymentDetail" placeholder="Enter UPI ID (example@paytm)" style="width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">';
+  } else if (selectedPayment === 'phonepe') {
+    formHTML = '<input type="tel" id="paymentDetail" placeholder="Enter PhonePe Mobile Number" maxlength="10" style="width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">';
+  } else if (selectedPayment === 'bank') {
+    formHTML = `
+      <input type="text" id="accountNumber" placeholder="Account Number" style="width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+      <input type="text" id="ifscCode" placeholder="IFSC Code" style="width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+      <input type="text" id="accountHolder" placeholder="Account Holder Name" style="width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+    `;
+  }
+  
+  document.getElementById('paymentForm').innerHTML = formHTML;
+  document.getElementById('paymentModal').classList.add('active');
+}
+
+function confirmWithdrawal() {
+  const amount = parseInt(document.getElementById('withdrawAmount').value);
+  const paymentDetail = document.getElementById('paymentDetail')?.value;
+  
+  if (selectedPayment !== 'bank' && (!paymentDetail || paymentDetail.length < 5)) {
+    alert('❌ Please enter valid payment details');
+    return;
+  }
+  
+  if (selectedPayment === 'bank') {
+    const accNum = document.getElementById('accountNumber').value;
+    const ifsc = document.getElementById('ifscCode').value;
+    const holder = document.getElementById('accountHolder').value;
+    
+    if (!accNum || !ifsc || !holder) {
+      alert('❌ Please fill all bank details');
+      return;
+    }
+  }
+  
+  // Process withdrawal
+  balance -= amount;
+  totalWithdrawn += amount;
+  
+  const txnId = 'TXN' + Date.now();
+  history.unshift({ 
+    type: 'withdrawal', 
+    method: selectedPayment.toUpperCase(), 
+    amount: amount, 
+    time: new Date().toLocaleTimeString(),
+    txnId: txnId
+  });
+  
+  updateHistory();
+  updateUI();
+  
+  document.getElementById('paymentModal').classList.remove('active');
+  document.getElementById('successAmount').textContent = amount;
+  document.getElementById('txnId').textContent = txnId;
+  document.getElementById('successModal').classList.add('active');
+  
+  document.getElementById('withdrawAmount').value = '';
+  hideWithdrawal();
+}
+
+function closePaymentModal() {
+  document.getElementById('paymentModal').classList.remove('active');
+}
+
+function closeSuccessModal() {
+  document.getElementById('successModal').classList.remove('active');
+}
+
 function watchAd() {
-  alert('🎬 Ad will play here!\n\nIn real app, integrate:\n- Google AdMob\n- Facebook Audience Network\n- Unity Ads');
+  alert('🎬 Ad Playing...\n\nIn production:\n- Google AdMob\n- Facebook Audience Network\n- Unity Ads\n\nYou earn ₹0.50-2 per ad view!');
   spinsLeft += 1;
   updateUI();
 }
 
 function inviteFriend() {
   const referralCode = 'SPIN' + Math.random().toString(36).substr(2, 6).toUpperCase();
-  alert(`🎁 Share your referral code:\n\n${referralCode}\n\nYour friend gets ₹10 signup bonus\nYou get +5 spins + ₹10!`);
+  const shareText = `🎰 Join Spin & Earn and get ₹10 signup bonus!\n\nUse my code: ${referralCode}\n\nDownload: https://johnsondelark-png.github.io/spin-and-earn-game/`;
+  
+  if (navigator.share) {
+    navigator.share({ text: shareText });
+  } else {
+    alert(`🎁 Share this with friends:\n\n${shareText}`);
+  }
 }
 
 function dailyCheckin() {
@@ -252,65 +438,47 @@ if (window.location.search.includes('admin=true')) {
           <p style="font-size: 32px; font-weight: bold; color: #667eea;">1,247</p>
         </div>
         <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
-          <h3 style="color: #666; font-size: 14px;">Active Today</h3>
-          <p style="font-size: 32px; font-weight: bold; color: #51cf66;">342</p>
-        </div>
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
-          <h3 style="color: #666; font-size: 14px;">Total Spins</h3>
-          <p style="font-size: 32px; font-weight: bold; color: #ffd43b;">8,456</p>
-        </div>
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
-          <h3 style="color: #666; font-size: 14px;">Payouts</h3>
+          <h3 style="color: #666; font-size: 14px;">Total Withdrawals</h3>
           <p style="font-size: 32px; font-weight: bold; color: #ff6b6b;">₹45,230</p>
+        </div>
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+          <h3 style="color: #666; font-size: 14px;">Pending Payouts</h3>
+          <p style="font-size: 32px; font-weight: bold; color: #ffd43b;">₹8,450</p>
+        </div>
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+          <h3 style="color: #666; font-size: 14px;">Ad Revenue</h3>
+          <p style="font-size: 32px; font-weight: bold; color: #51cf66;">₹12,680</p>
         </div>
       </div>
       
       <div style="background: #f8f9fa; padding: 25px; border-radius: 10px; margin-bottom: 20px;">
-        <h2 style="margin-bottom: 20px;">🎯 Wheel Configuration</h2>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
-          <div>
-            <label style="display: block; margin-bottom: 5px; color: #666;">Prize 1</label>
-            <input type="number" value="100" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-          </div>
-          <div>
-            <label style="display: block; margin-bottom: 5px; color: #666;">Prize 2</label>
-            <input type="number" value="5" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-          </div>
-          <div>
-            <label style="display: block; margin-bottom: 5px; color: #666;">Prize 3</label>
-            <input type="number" value="20" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-          </div>
-          <div>
-            <label style="display: block; margin-bottom: 5px; color: #666;">Prize 4</label>
-            <input type="number" value="50" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-          </div>
-        </div>
-        <button style="margin-top: 20px; background: #667eea; color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-weight: bold;">Save Changes</button>
-      </div>
-      
-      <div style="background: #f8f9fa; padding: 25px; border-radius: 10px;">
-        <h2 style="margin-bottom: 20px;">👥 Recent Users</h2>
+        <h2 style="margin-bottom: 20px;">💸 Recent Withdrawals</h2>
         <table style="width: 100%; border-collapse: collapse;">
           <thead>
             <tr style="background: white;">
               <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">User</th>
-              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Balance</th>
-              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Spins</th>
-              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Joined</th>
+              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Amount</th>
+              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Method</th>
+              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Status</th>
+              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Action</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td style="padding: 12px; border-bottom: 1px solid #eee;">user_${Math.floor(Math.random()*1000)}</td>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">₹${Math.floor(Math.random()*500)}</td>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">${Math.floor(Math.random()*50)}</td>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">Today</td>
+              <td style="padding: 12px; border-bottom: 1px solid #eee;">₹${Math.floor(Math.random()*500)+50}</td>
+              <td style="padding: 12px; border-bottom: 1px solid #eee;">Paytm</td>
+              <td style="padding: 12px; border-bottom: 1px solid #eee;"><span style="background: #fff3cd; padding: 4px 12px; border-radius: 12px; font-size: 12px;">Pending</span></td>
+              <td style="padding: 12px; border-bottom: 1px solid #eee;">
+                <button style="background: #51cf66; color: white; border: none; padding: 6px 15px; border-radius: 5px; cursor: pointer; margin-right: 5px;">Approve</button>
+                <button style="background: #ff6b6b; color: white; border: none; padding: 6px 15px; border-radius: 5px; cursor: pointer;">Reject</button>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
       
-      <button onclick="window.location.href='?'" style="margin-top: 20px; background: #ff6b6b; color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-weight: bold;">← Back to Game</button>
+      <button onclick="window.location.href='?'" style="background: #ff6b6b; color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-weight: bold;">← Back to Game</button>
     </div>
   `;
 }
