@@ -8,6 +8,13 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
 
+/* Download Banner */
+.download-banner { background: linear-gradient(135deg, #ff6b6b, #ff8787); color: white; padding: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+.download-banner h2 { margin-bottom: 10px; font-size: 24px; }
+.download-banner p { margin-bottom: 15px; font-size: 14px; }
+.download-btn { background: white; color: #ff6b6b; padding: 12px 30px; border: none; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+.download-btn:hover { transform: scale(1.05); }
+
 /* Header */
 .header { background: rgba(255,255,255,0.95); padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
 .header h1 { color: #667eea; font-size: 24px; }
@@ -17,10 +24,10 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 /* Container */
 .container { max-width: 600px; margin: 20px auto; padding: 20px; }
 
-/* Ad Banner */
-.ad-banner { background: white; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-.ad-banner img { max-width: 100%; height: auto; border-radius: 8px; }
-.ad-placeholder { background: #f8f9fa; padding: 40px; border: 2px dashed #ddd; border-radius: 8px; color: #666; }
+/* Info Box */
+.info-box { background: #e7f5ff; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #667eea; }
+.info-box h3 { color: #667eea; margin-bottom: 10px; font-size: 16px; }
+.info-box p { color: #495057; font-size: 13px; line-height: 1.6; }
 
 /* Stats */
 .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px; }
@@ -44,29 +51,15 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 .rewards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
 .reward-card { border: 2px solid #ddd; padding: 15px; border-radius: 12px; text-align: center; transition: 0.3s; }
 .reward-card:hover { border-color: #667eea; transform: scale(1.05); }
-.reward-card img { width: 60px; height: 60px; margin-bottom: 10px; }
 .reward-card h4 { color: #333; margin-bottom: 8px; font-size: 14px; }
 .reward-card .price { color: #ffd43b; font-weight: bold; margin-bottom: 10px; }
 .redeem-btn { background: #51cf66; color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 12px; }
-.redeem-btn:disabled { background: #ccc; }
-
-/* Affiliate Products */
-.affiliate-section { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
-.affiliate-section h2 { margin-bottom: 20px; color: #333; }
-.product-card { display: flex; gap: 15px; padding: 15px; background: #f8f9fa; border-radius: 10px; margin-bottom: 15px; }
-.product-card img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; }
-.product-info { flex: 1; }
-.product-info h4 { color: #333; margin-bottom: 5px; font-size: 14px; }
-.product-info .price { color: #51cf66; font-weight: bold; margin-bottom: 5px; }
-.product-info .commission { color: #667eea; font-size: 12px; }
-.buy-btn { background: #ff6b6b; color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 12px; }
 
 /* Tasks */
 .tasks { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
 .tasks h2 { margin-bottom: 15px; color: #333; }
 .task-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; border-radius: 10px; margin-bottom: 10px; }
 .task-btn { background: #51cf66; color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; }
-.task-btn:disabled { background: #ccc; }
 
 /* Modal */
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
@@ -74,16 +67,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 .modal-content { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 400px; width: 90%; animation: modalPop 0.3s; }
 @keyframes modalPop { from { transform: scale(0.5); } to { transform: scale(1); } }
 .modal h2 { color: #51cf66; font-size: 32px; margin-bottom: 20px; }
-.modal input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
 .modal-close { background: #667eea; color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; margin-top: 20px; font-size: 16px; }
-
-/* Info Box */
-.info-box { background: #e7f5ff; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #667eea; }
-.info-box h3 { color: #667eea; margin-bottom: 10px; font-size: 16px; }
-.info-box p { color: #495057; font-size: 13px; line-height: 1.6; }
-
-/* Admin Button */
-.admin-btn { position: fixed; bottom: 20px; right: 20px; background: #ff6b6b; color: white; border: none; padding: 15px 25px; border-radius: 50px; cursor: pointer; box-shadow: 0 5px 15px rgba(255,107,107,0.4); font-weight: bold; z-index: 100; }
 
 @media (max-width: 600px) {
   .wheel { width: 250px; height: 250px; }
@@ -93,6 +77,13 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 </style>
 </head>
 <body>
+
+<!-- Download Banner -->
+<div class="download-banner">
+  <h2>📱 Download Android App - 100% FREE!</h2>
+  <p>Get better experience + Earn more with our mobile app</p>
+  <a href="#" class="download-btn" onclick="downloadAPK()">⬇️ Download APK (FREE)</a>
+</div>
 
 <div class="header">
   <h1>🎰 Spin & Earn</h1>
@@ -113,14 +104,6 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
     </p>
   </div>
 
-  <!-- Ad Banner (AdMob Placeholder) -->
-  <div class="ad-banner">
-    <div class="ad-placeholder">
-      📺 <strong>AdMob Banner Ad</strong><br>
-      <small>You earn ₹0.50-2 per impression</small>
-    </div>
-  </div>
-
   <!-- Stats -->
   <div class="stats">
     <div class="stat-card">
@@ -134,7 +117,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   </div>
 
   <!-- Spin Wheel -->
-  <div class="wheel-container">
+  <div class="wheel-container" id="wheelSection">
     <h2>🎡 Spin & Win Points!</h2>
     <div style="position: relative;">
       <div class="pointer"></div>
@@ -185,29 +168,6 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
     <button class="spin-btn" onclick="hideRewards()" style="margin-top: 20px; font-size: 16px; padding: 12px 30px;">Back to Game</button>
   </div>
 
-  <!-- Affiliate Products -->
-  <div class="affiliate-section">
-    <h2>🛍️ Shop & Earn Commission</h2>
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/71ZOtNdaZCL._AC_UY218_.jpg" alt="Product">
-      <div class="product-info">
-        <h4>Wireless Earbuds</h4>
-        <div class="price">₹999</div>
-        <div class="commission">Your Commission: ₹50 + 500 Points</div>
-      </div>
-      <button class="buy-btn" onclick="affiliatePurchase('earbuds', 50, 500)">Buy Now</button>
-    </div>
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/61VuVU94RnL._AC_UY218_.jpg" alt="Product">
-      <div class="product-info">
-        <h4>Smart Watch</h4>
-        <div class="price">₹1,499</div>
-        <div class="commission">Your Commission: ₹75 + 750 Points</div>
-      </div>
-      <button class="buy-btn" onclick="affiliatePurchase('watch', 75, 750)">Buy Now</button>
-    </div>
-  </div>
-
   <!-- Tasks -->
   <div class="tasks">
     <h2>🎯 Earn More Points & Money</h2>
@@ -234,10 +194,10 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
     </div>
     <div class="task-item">
       <div>
-        <strong>Complete Survey</strong><br>
-        <small>+1000 Points + ₹15</small>
+        <strong>Download Android App</strong><br>
+        <small>+1000 Points Bonus!</small>
       </div>
-      <button class="task-btn" onclick="completeSurvey()">Start</button>
+      <button class="task-btn" onclick="downloadAPK()">Download</button>
     </div>
   </div>
 </div>
@@ -251,6 +211,27 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   </div>
 </div>
 
+<!-- Download Modal -->
+<div class="modal" id="downloadModal">
+  <div class="modal-content">
+    <h2>📱 Download App</h2>
+    <p style="margin: 20px 0; color: #666;">
+      <strong>How to Install:</strong><br>
+      1. Download APK file<br>
+      2. Open downloaded file<br>
+      3. Enable "Unknown sources" if asked<br>
+      4. Install & Enjoy!
+    </p>
+    <p style="background: #e7f5ff; padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 14px;">
+      <strong>📦 File Size:</strong> 5 MB<br>
+      <strong>✅ 100% Safe & Secure</strong><br>
+      <strong>🎁 Bonus: +1000 Points on first login!</strong>
+    </p>
+    <a href="#" class="download-btn" style="display: inline-block; margin: 10px;" onclick="alert('APK will be available soon! For now, use web version.')">Download Now</a>
+    <button class="modal-close" onclick="closeDownloadModal()">Maybe Later</button>
+  </div>
+</div>
+
 <!-- Redeem Modal -->
 <div class="modal" id="redeemModal">
   <div class="modal-content">
@@ -261,11 +242,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   </div>
 </div>
 
-<!-- Admin Button -->
-<button class="admin-btn" onclick="window.location.href='?admin=true'">⚙️ Admin</button>
-
 <script>
-// Game State
 let points = 0;
 let earnings = 0;
 let totalPoints = 0;
@@ -322,16 +299,14 @@ function closeModal() {
 
 function showRewards() {
   document.getElementById('rewardsSection').style.display = 'block';
-  document.querySelector('.wheel-container').style.display = 'none';
-  document.querySelector('.affiliate-section').style.display = 'none';
+  document.getElementById('wheelSection').style.display = 'none';
   document.querySelector('.tasks').style.display = 'none';
   window.scrollTo(0, 0);
 }
 
 function hideRewards() {
   document.getElementById('rewardsSection').style.display = 'none';
-  document.querySelector('.wheel-container').style.display = 'block';
-  document.querySelector('.affiliate-section').style.display = 'block';
+  document.getElementById('wheelSection').style.display = 'block';
   document.querySelector('.tasks').style.display = 'block';
 }
 
@@ -363,176 +338,42 @@ function closeRedeemModal() {
 }
 
 function watchRewardedAd() {
-  alert('🎬 Rewarded Ad Playing...\n\nIn production:\n- Google AdMob Rewarded Ads\n- You earn ₹1-5 per ad view\n- User gets rewards');
-  
+  alert('🎬 Ad Playing...');
   points += 100;
   totalPoints += 100;
   earnings += 2;
   totalEarnings += 2;
-  
   updateUI();
-  alert('✅ Ad completed!\n+100 Points\n+₹2 Earnings');
-}
-
-function affiliatePurchase(product, commission, pointsEarned) {
-  // In production, this would redirect to affiliate link
-  const affiliateLinks = {
-    earbuds: 'https://amzn.to/example1',
-    watch: 'https://amzn.to/example2'
-  };
-  
-  alert(`🛒 Opening product page...\n\nWhen user completes purchase:\n- You earn ₹${commission} commission\n- You get ${pointsEarned} points\n\nAffiliate Link: ${affiliateLinks[product]}`);
-  
-  // Simulate purchase (in real app, this happens after actual purchase)
-  setTimeout(() => {
-    if (confirm('Simulate successful purchase?')) {
-      earnings += commission;
-      totalEarnings += commission;
-      points += pointsEarned;
-      totalPoints += pointsEarned;
-      updateUI();
-      alert(`✅ Purchase successful!\n+₹${commission}\n+${pointsEarned} Points`);
-    }
-  }, 1000);
+  alert('✅ +100 Points\n+₹2 Earnings');
 }
 
 function inviteFriend() {
   const referralCode = 'SPIN' + Math.random().toString(36).substr(2, 6).toUpperCase();
-  const shareText = `🎰 Join Spin & Earn!\n\n✅ Earn real money\n✅ Redeem vouchers\n✅ Shop & earn commission\n\nUse code: ${referralCode}\n\nPlay: https://johnsondelark-png.github.io/spin-and-earn-game/`;
+  const shareText = `🎰 Join Spin & Earn!\n\n✅ Earn real money\n✅ Redeem vouchers\n\nUse code: ${referralCode}\n\nPlay: https://johnsondelark-png.github.io/spin-and-earn-game/`;
   
   if (navigator.share) {
     navigator.share({ text: shareText });
   } else {
-    alert(`🎁 Share with friends:\n\n${shareText}`);
+    alert(`🎁 Share:\n\n${shareText}`);
   }
-  
-  // Simulate referral success
-  setTimeout(() => {
-    if (confirm('Simulate friend joined?')) {
-      points += 500;
-      totalPoints += 500;
-      earnings += 10;
-      totalEarnings += 10;
-      updateUI();
-      alert('✅ Friend joined!\n+500 Points\n+₹10');
-    }
-  }, 1000);
 }
 
 function dailyCheckin() {
   points += 300;
   totalPoints += 300;
   spinsLeft += 3;
-  
   document.getElementById('checkinBtn').disabled = true;
   document.getElementById('checkinBtn').textContent = 'Claimed!';
-  
   updateUI();
-  alert('✅ Daily check-in!\n+300 Points\n+3 Spins');
+  alert('✅ +300 Points\n+3 Spins');
 }
 
-function completeSurvey() {
-  alert('📋 Survey Starting...\n\nIn production:\n- Google Opinion Rewards\n- Survey Junkie\n- Swagbucks\n\nYou earn ₹10-50 per survey');
-  
-  setTimeout(() => {
-    if (confirm('Simulate survey completion?')) {
-      points += 1000;
-      totalPoints += 1000;
-      earnings += 15;
-      totalEarnings += 15;
-      updateUI();
-      alert('✅ Survey completed!\n+1000 Points\n+₹15');
-    }
-  }, 1000);
+function downloadAPK() {
+  document.getElementById('downloadModal').classList.add('active');
 }
 
-// Admin Panel
-if (window.location.search.includes('admin=true')) {
-  document.body.innerHTML = `
-    <div style="max-width: 1200px; margin: 0 auto; padding: 20px; background: white; min-height: 100vh;">
-      <h1 style="color: #667eea; margin-bottom: 30px;">⚙️ Spin & Earn - Admin Dashboard</h1>
-      
-      <div style="background: #e7f5ff; padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 4px solid #667eea;">
-        <h2 style="color: #667eea; margin-bottom: 15px;">💰 Revenue Streams (No KYC Required)</h2>
-        <ol style="color: #495057; line-height: 2;">
-          <li><strong>AdMob:</strong> ₹0.50-5 per ad view → Setup at <a href="https://admob.google.com" target="_blank">admob.google.com</a></li>
-          <li><strong>Affiliate:</strong> 5-15% commission → Amazon Associates, Flipkart</li>
-          <li><strong>Vouchers:</strong> 10-20% margin → Xoxoday, Qwikcilver APIs</li>
-          <li><strong>Sponsorships:</strong> ₹5,000-50,000/month → Direct brand deals</li>
-        </ol>
-      </div>
-      
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px;">
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
-          <h3 style="color: #666; font-size: 14px;">Ad Revenue</h3>
-          <p style="font-size: 32px; font-weight: bold; color: #667eea;">₹12,450</p>
-          <small style="color: #51cf66;">+18% this week</small>
-        </div>
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
-          <h3 style="color: #666; font-size: 14px;">Affiliate Earnings</h3>
-          <p style="font-size: 32px; font-weight: bold; color: #ff6b6b;">₹8,230</p>
-          <small style="color: #51cf66;">+25% this week</small>
-        </div>
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
-          <h3 style="color: #666; font-size: 14px;">Voucher Margin</h3>
-          <p style="font-size: 32px; font-weight: bold; color: #51cf66;">₹5,670</p>
-          <small style="color: #51cf66;">+12% this week</small>
-        </div>
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
-          <h3 style="color: #666; font-size: 14px;">Total Revenue</h3>
-          <p style="font-size: 32px; font-weight: bold; color: #ffd43b;">₹26,350</p>
-          <small style="color: #51cf66;">+19% this week</small>
-        </div>
-      </div>
-      
-      <div style="background: #f8f9fa; padding: 25px; border-radius: 10px; margin-bottom: 20px;">
-        <h2 style="margin-bottom: 20px;">📊 User Activity</h2>
-        <table style="width: 100%; border-collapse: collapse;">
-          <thead>
-            <tr style="background: white;">
-              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Metric</th>
-              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Today</th>
-              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">This Week</th>
-              <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Revenue</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">Ad Views</td>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">2,456</td>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">15,234</td>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">₹12,450</td>
-            </tr>
-            <tr>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">Affiliate Clicks</td>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">342</td>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">2,145</td>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">₹8,230</td>
-            </tr>
-            <tr>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">Voucher Redeems</td>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">89</td>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">567</td>
-              <td style="padding: 12px; border-bottom: 1px solid #eee;">₹5,670</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
-      <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-        <h3 style="color: #856404; margin-bottom: 10px;">🚀 Next Steps to Maximize Earnings:</h3>
-        <ul style="color: #856404; line-height: 2;">
-          <li>Setup Google AdMob account (Free)</li>
-          <li>Join Amazon Associates program</li>
-          <li>Integrate Xoxoday voucher API</li>
-          <li>Reach out to local brands for sponsorships</li>
-          <li>Create Android app for better ad revenue</li>
-        </ul>
-      </div>
-      
-      <button onclick="window.location.href='?'" style="background: #ff6b6b; color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-weight: bold;">← Back to Game</button>
-    </div>
-  `;
+function closeDownloadModal() {
+  document.getElementById('downloadModal').classList.remove('active');
 }
 
 updateUI();
