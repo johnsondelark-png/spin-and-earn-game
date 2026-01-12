@@ -4,16 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spin & Earn - Win Real Rewards!</title>
+
+<!-- PropellerAds Code - Replace XXXXX with your actual code -->
+<script>
+// Add your PropellerAds code here after signup
+// Example: (function(d,z,s){...})(document,"script");
+</script>
+
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+
+/* Ad Containers */
+.ad-container { background: white; padding: 10px; border-radius: 10px; text-align: center; margin: 10px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+.ad-label { font-size: 10px; color: #999; margin-bottom: 5px; }
 
 /* Download Banner */
 .download-banner { background: linear-gradient(135deg, #ff6b6b, #ff8787); color: white; padding: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
 .download-banner h2 { margin-bottom: 10px; font-size: 24px; }
 .download-banner p { margin-bottom: 15px; font-size: 14px; }
 .download-btn { background: white; color: #ff6b6b; padding: 12px 30px; border: none; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-.download-btn:hover { transform: scale(1.05); }
 
 /* Header */
 .header { background: rgba(255,255,255,0.95); padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
@@ -78,6 +88,16 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 </head>
 <body>
 
+<!-- Top Ad Banner (A-Ads) -->
+<div class="ad-container">
+  <div class="ad-label">Advertisement</div>
+  <!-- Replace XXXXX with your A-Ads ad unit ID -->
+  <iframe data-aa='XXXXX' src='//ad.a-ads.com/XXXXX?size=728x90' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+  <div style="font-size: 11px; color: #999; margin-top: 5px;">
+    Ads help us keep this game FREE! 🎮
+  </div>
+</div>
+
 <!-- Download Banner -->
 <div class="download-banner">
   <h2>📱 Download Android App - 100% FREE!</h2>
@@ -96,12 +116,21 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 <div class="container">
   <!-- Info Box -->
   <div class="info-box">
-    <h3>💰 3 Ways to Earn Money - No KYC Required!</h3>
+    <h3>💰 Earn Money - Support us by viewing ads!</h3>
     <p>
-      ✅ <strong>Watch Ads:</strong> Earn ₹1-5 per ad<br>
+      ✅ <strong>Watch Ads:</strong> Earn ₹1-5 per ad (helps us keep game FREE!)<br>
       ✅ <strong>Shop & Earn:</strong> Get commission on purchases<br>
       ✅ <strong>Redeem Rewards:</strong> Convert points to cash/vouchers
     </p>
+  </div>
+
+  <!-- Mid Ad Banner (PropellerAds) -->
+  <div class="ad-container">
+    <div class="ad-label">Sponsored</div>
+    <!-- PropellerAds Banner will appear here -->
+    <div id="propeller-banner" style="min-height: 90px; display: flex; align-items: center; justify-content: center; background: #f8f9fa;">
+      <p style="color: #999;">Loading ad...</p>
+    </div>
   </div>
 
   <!-- Stats -->
@@ -174,7 +203,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
     <div class="task-item">
       <div>
         <strong>Watch Rewarded Ad</strong><br>
-        <small>+100 Points + ₹2</small>
+        <small>+100 Points + ₹2 (Supports us!)</small>
       </div>
       <button class="task-btn" onclick="watchRewardedAd()">Watch</button>
     </div>
@@ -200,6 +229,13 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
       <button class="task-btn" onclick="downloadAPK()">Download</button>
     </div>
   </div>
+
+  <!-- Bottom Ad Banner (A-Ads) -->
+  <div class="ad-container">
+    <div class="ad-label">Advertisement</div>
+    <!-- Replace XXXXX with your A-Ads ad unit ID -->
+    <iframe data-aa='XXXXX' src='//ad.a-ads.com/XXXXX?size=728x90' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+  </div>
 </div>
 
 <!-- Win Modal -->
@@ -208,27 +244,6 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
     <h2>🎉 Congratulations!</h2>
     <p style="font-size: 24px; margin: 20px 0;">You Won <strong style="color: #ffd43b;"><span id="winPoints">0</span> Points!</strong></p>
     <button class="modal-close" onclick="closeModal()">Awesome!</button>
-  </div>
-</div>
-
-<!-- Download Modal -->
-<div class="modal" id="downloadModal">
-  <div class="modal-content">
-    <h2>📱 Download App</h2>
-    <p style="margin: 20px 0; color: #666;">
-      <strong>How to Install:</strong><br>
-      1. Download APK file<br>
-      2. Open downloaded file<br>
-      3. Enable "Unknown sources" if asked<br>
-      4. Install & Enjoy!
-    </p>
-    <p style="background: #e7f5ff; padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 14px;">
-      <strong>📦 File Size:</strong> 5 MB<br>
-      <strong>✅ 100% Safe & Secure</strong><br>
-      <strong>🎁 Bonus: +1000 Points on first login!</strong>
-    </p>
-    <a href="#" class="download-btn" style="display: inline-block; margin: 10px;" onclick="alert('APK will be available soon! For now, use web version.')">Download Now</a>
-    <button class="modal-close" onclick="closeDownloadModal()">Maybe Later</button>
   </div>
 </div>
 
@@ -338,18 +353,18 @@ function closeRedeemModal() {
 }
 
 function watchRewardedAd() {
-  alert('🎬 Ad Playing...');
+  alert('🎬 Ad Playing...\n\nThank you for supporting us by watching ads!\nThis helps us keep the game FREE for everyone! 🙏');
   points += 100;
   totalPoints += 100;
   earnings += 2;
   totalEarnings += 2;
   updateUI();
-  alert('✅ +100 Points\n+₹2 Earnings');
+  alert('✅ +100 Points\n+₹2 Earnings\n\nYou\'re awesome! 🎉');
 }
 
 function inviteFriend() {
   const referralCode = 'SPIN' + Math.random().toString(36).substr(2, 6).toUpperCase();
-  const shareText = `🎰 Join Spin & Earn!\n\n✅ Earn real money\n✅ Redeem vouchers\n\nUse code: ${referralCode}\n\nPlay: https://johnsondelark-png.github.io/spin-and-earn-game/`;
+  const shareText = `🎰 Join Spin & Earn!\n\n✅ Earn real money\n✅ Redeem vouchers\n✅ 100% FREE\n\nUse code: ${referralCode}\n\nPlay: https://johnsondelark-png.github.io/spin-and-earn-game/`;
   
   if (navigator.share) {
     navigator.share({ text: shareText });
@@ -369,11 +384,7 @@ function dailyCheckin() {
 }
 
 function downloadAPK() {
-  document.getElementById('downloadModal').classList.add('active');
-}
-
-function closeDownloadModal() {
-  document.getElementById('downloadModal').classList.remove('active');
+  alert('📱 APK Download\n\nAndroid app coming soon!\n\nFor now, use "Add to Home Screen" for app-like experience!');
 }
 
 updateUI();
