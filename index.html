@@ -15,8 +15,14 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 .header h1 { color: #667eea; font-size: 24px; }
 .points { background: #ffd43b; color: #333; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; }
 .balance { background: #51cf66; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; margin-left: 10px; }
+.register-btn { background: #ff6b6b; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; }
 
 .container { max-width: 600px; margin: 20px auto; padding: 20px; }
+
+.alert-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+.alert-box h3 { color: #856404; margin-bottom: 10px; }
+.alert-box p { color: #856404; font-size: 14px; }
+.alert-box button { background: #ffc107; color: #000; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; margin-top: 10px; }
 
 .wheel-container { background: white; border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 20px; }
 .wheel { width: 300px; height: 300px; margin: 20px auto; position: relative; border-radius: 50%; border: 10px solid #ffd43b; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); }
@@ -40,11 +46,16 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 .task-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; border-radius: 10px; margin-bottom: 10px; }
 .task-btn { background: #51cf66; color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; }
 
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; overflow-y: auto; }
 .modal.active { display: flex; }
-.modal-content { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 400px; width: 90%; }
+.modal-content { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 500px; width: 90%; margin: 20px; }
 .modal h2 { color: #51cf66; font-size: 32px; margin-bottom: 20px; }
 .modal-close { background: #667eea; color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; margin-top: 20px; font-size: 16px; }
+
+.form-group { margin-bottom: 15px; text-align: left; }
+.form-group label { display: block; margin-bottom: 5px; color: #333; font-weight: bold; }
+.form-group input, .form-group select { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 10px; font-size: 14px; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: #667eea; }
 
 @media (max-width: 600px) {
   .wheel { width: 250px; height: 250px; }
@@ -58,12 +69,20 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 <div class="header">
   <h1>🎰 Spin & Earn</h1>
   <div>
+    <button class="register-btn" onclick="showRegister()" id="registerBtn">Register</button>
     <span class="points" onclick="showRewards()">⭐ <span id="points">0</span> Points</span>
     <span class="balance">₹<span id="earnings">0</span></span>
   </div>
 </div>
 
 <div class="container">
+  <!-- Registration Alert -->
+  <div class="alert-box" id="registerAlert">
+    <h3>⚠️ Register to Redeem Real Money!</h3>
+    <p>Register your account to convert points to real cash. Without registration, you can play but cannot withdraw money.</p>
+    <button onclick="showRegister()">Register Now - FREE!</button>
+  </div>
+
   <!-- Spin Wheel Section -->
   <div class="wheel-container" id="wheelSection">
     <h2>🎡 Spin & Win Points!</h2>
@@ -94,42 +113,28 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
         <div style="font-size: 40px;">💳</div>
         <h4>Paytm Cash</h4>
         <div class="price">1000 Points = ₹10</div>
-        <button class="redeem-btn" onclick="redeemReward('paytm', 1000, 10)">Redeem</button>
+        <button class="redeem-btn" onclick="redeemReward('Paytm Cash', 1000, 10)">Redeem</button>
       </div>
       
       <div class="reward-card">
         <div style="font-size: 40px;">🛒</div>
         <h4>Amazon Voucher</h4>
         <div class="price">2000 Points = ₹25</div>
-        <button class="redeem-btn" onclick="redeemReward('amazon', 2000, 25)">Redeem</button>
+        <button class="redeem-btn" onclick="redeemReward('Amazon Voucher', 2000, 25)">Redeem</button>
       </div>
       
       <div class="reward-card">
         <div style="font-size: 40px;">📱</div>
         <h4>Mobile Recharge</h4>
         <div class="price">1500 Points = ₹20</div>
-        <button class="redeem-btn" onclick="redeemReward('recharge', 1500, 20)">Redeem</button>
+        <button class="redeem-btn" onclick="redeemReward('Mobile Recharge', 1500, 20)">Redeem</button>
       </div>
       
       <div class="reward-card">
         <div style="font-size: 40px;">🎮</div>
         <h4>Google Play</h4>
         <div class="price">2500 Points = ₹30</div>
-        <button class="redeem-btn" onclick="redeemReward('googleplay', 2500, 30)">Redeem</button>
-      </div>
-      
-      <div class="reward-card">
-        <div style="font-size: 40px;">🍕</div>
-        <h4>Zomato Voucher</h4>
-        <div class="price">3000 Points = ₹40</div>
-        <button class="redeem-btn" onclick="redeemReward('zomato', 3000, 40)">Redeem</button>
-      </div>
-      
-      <div class="reward-card">
-        <div style="font-size: 40px;">🎬</div>
-        <h4>BookMyShow</h4>
-        <div class="price">2500 Points = ₹30</div>
-        <button class="redeem-btn" onclick="redeemReward('bookmyshow', 2500, 30)">Redeem</button>
+        <button class="redeem-btn" onclick="redeemReward('Google Play', 2500, 30)">Redeem</button>
       </div>
     </div>
     
@@ -163,6 +168,71 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   </div>
 </div>
 
+<!-- Registration Modal -->
+<div class="modal" id="registerModal">
+  <div class="modal-content">
+    <h2>📝 Register Account</h2>
+    <p style="color: #666; margin-bottom: 20px;">Register to redeem real money!</p>
+    
+    <form id="registerForm" onsubmit="submitRegistration(event)">
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" id="regName" required placeholder="Enter your full name">
+      </div>
+      
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" id="regEmail" required placeholder="your@email.com">
+      </div>
+      
+      <div class="form-group">
+        <label>Mobile Number *</label>
+        <input type="tel" id="regMobile" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
+      </div>
+      
+      <div class="form-group">
+        <label>Payment Method *</label>
+        <select id="regPayment" required>
+          <option value="">Select payment method</option>
+          <option value="Paytm">Paytm</option>
+          <option value="UPI">UPI (Google Pay/PhonePe)</option>
+          <option value="Bank Transfer">Bank Transfer</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Paytm/UPI ID *</label>
+        <input type="text" id="regUPI" required placeholder="9876543210@paytm or UPI ID">
+      </div>
+      
+      <button type="submit" class="spin-btn" style="width: 100%; margin-top: 10px;">Register Now</button>
+    </form>
+    
+    <button class="modal-close" onclick="closeRegister()">Cancel</button>
+  </div>
+</div>
+
+<!-- Redemption Modal -->
+<div class="modal" id="redeemModal">
+  <div class="modal-content">
+    <h2 id="redeemTitle">🎁 Redeem Reward</h2>
+    <p id="redeemMessage" style="font-size: 18px; margin: 20px 0;"></p>
+    
+    <div id="redeemForm" style="display: none;">
+      <p style="color: #666; margin-bottom: 15px;">Confirm your redemption details:</p>
+      <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left;">
+        <p><strong>Reward:</strong> <span id="rewardType"></span></p>
+        <p><strong>Value:</strong> ₹<span id="rewardValue"></span></p>
+        <p><strong>Points:</strong> <span id="rewardPoints"></span></p>
+      </div>
+      <button class="spin-btn" onclick="confirmRedemption()" style="width: 100%;">Confirm Redemption</button>
+    </div>
+    
+    <p id="redeemNote" style="color: #999; font-size: 12px; margin-top: 15px;"></p>
+    <button class="modal-close" onclick="closeRedeemModal()">Close</button>
+  </div>
+</div>
+
 <!-- Win Modal -->
 <div class="modal" id="winModal">
   <div class="modal-content">
@@ -172,29 +242,46 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   </div>
 </div>
 
-<!-- Redeem Modal -->
-<div class="modal" id="redeemModal">
-  <div class="modal-content">
-    <h2>✅ Redeemed Successfully!</h2>
-    <p style="font-size: 18px; margin: 20px 0;"><span id="redeemMessage"></span></p>
-    <p style="color: #666; font-size: 14px; margin-top: 10px;">Voucher code will be sent to your registered mobile/email within 24 hours.</p>
-    <p style="color: #999; font-size: 12px; margin-top: 10px;">Note: This is a demo. Real payments will be processed after ad integration.</p>
-    <button class="modal-close" onclick="closeRedeemModal()">Done</button>
-  </div>
-</div>
-
 <script>
 let points = 0;
 let earnings = 0;
 let spinsLeft = 5;
 let spinning = false;
+let isRegistered = false;
+let currentRedemption = null;
 
 const prizes = [1000, 50, 200, 500, 100, 20, 150, 300];
+
+// Check if user is registered
+function checkRegistration() {
+  const registered = localStorage.getItem('userRegistered');
+  if (registered === 'true') {
+    isRegistered = true;
+    document.getElementById('registerAlert').style.display = 'none';
+    document.getElementById('registerBtn').textContent = '✓ Registered';
+    document.getElementById('registerBtn').style.background = '#51cf66';
+  }
+  
+  // Load saved points
+  const savedPoints = localStorage.getItem('userPoints');
+  if (savedPoints) {
+    points = parseInt(savedPoints);
+  }
+  
+  const savedEarnings = localStorage.getItem('userEarnings');
+  if (savedEarnings) {
+    earnings = parseInt(savedEarnings);
+  }
+}
 
 function updateUI() {
   document.getElementById('points').textContent = points;
   document.getElementById('earnings').textContent = earnings;
   document.getElementById('spinsLeft').textContent = spinsLeft;
+  
+  // Save to localStorage
+  localStorage.setItem('userPoints', points);
+  localStorage.setItem('userEarnings', earnings);
 }
 
 function spin() {
@@ -246,32 +333,102 @@ function hideRewards() {
   document.getElementById('tasksSection').style.display = 'block';
 }
 
+function showRegister() {
+  if (isRegistered) {
+    alert('✅ You are already registered!\n\nYou can redeem rewards anytime.');
+    return;
+  }
+  document.getElementById('registerModal').classList.add('active');
+}
+
+function closeRegister() {
+  document.getElementById('registerModal').classList.remove('active');
+}
+
+function submitRegistration(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('regName').value;
+  const email = document.getElementById('regEmail').value;
+  const mobile = document.getElementById('regMobile').value;
+  const payment = document.getElementById('regPayment').value;
+  const upi = document.getElementById('regUPI').value;
+  
+  // Save registration data
+  localStorage.setItem('userRegistered', 'true');
+  localStorage.setItem('userName', name);
+  localStorage.setItem('userEmail', email);
+  localStorage.setItem('userMobile', mobile);
+  localStorage.setItem('userPayment', payment);
+  localStorage.setItem('userUPI', upi);
+  
+  isRegistered = true;
+  
+  closeRegister();
+  
+  alert(`✅ Registration Successful!\n\nWelcome ${name}!\n\nYou can now redeem rewards and earn real money!`);
+  
+  document.getElementById('registerAlert').style.display = 'none';
+  document.getElementById('registerBtn').textContent = '✓ Registered';
+  document.getElementById('registerBtn').style.background = '#51cf66';
+}
+
 function redeemReward(type, pointsCost, cashValue) {
+  if (!isRegistered) {
+    alert('⚠️ Registration Required!\n\nPlease register your account first to redeem rewards.\n\nClick the "Register" button to get started!');
+    showRegister();
+    return;
+  }
+  
   if (points < pointsCost) {
     alert(`❌ Not enough points!\n\nYou need ${pointsCost} points.\nYou have ${points} points.\n\nEarn more by spinning the wheel and completing tasks!`);
     return;
   }
   
+  currentRedemption = { type, pointsCost, cashValue };
+  
+  document.getElementById('rewardType').textContent = type;
+  document.getElementById('rewardValue').textContent = cashValue;
+  document.getElementById('rewardPoints').textContent = pointsCost;
+  document.getElementById('redeemForm').style.display = 'block';
+  document.getElementById('redeemTitle').textContent = '🎁 Confirm Redemption';
+  document.getElementById('redeemMessage').textContent = '';
+  document.getElementById('redeemNote').textContent = 'Payment will be processed within 24-48 hours';
+  
+  document.getElementById('redeemModal').classList.add('active');
+}
+
+function confirmRedemption() {
+  if (!currentRedemption) return;
+  
+  const { type, pointsCost, cashValue } = currentRedemption;
+  
   points -= pointsCost;
   earnings += cashValue;
   
-  const messages = {
-    paytm: `₹${cashValue} Paytm Cash`,
-    amazon: `₹${cashValue} Amazon Voucher`,
-    recharge: `₹${cashValue} Mobile Recharge`,
-    googleplay: `₹${cashValue} Google Play Credit`,
-    zomato: `₹${cashValue} Zomato Voucher`,
-    bookmyshow: `₹${cashValue} BookMyShow Voucher`
-  };
+  // Save redemption request
+  const redemptions = JSON.parse(localStorage.getItem('redemptions') || '[]');
+  redemptions.push({
+    type,
+    value: cashValue,
+    points: pointsCost,
+    date: new Date().toISOString(),
+    status: 'Pending'
+  });
+  localStorage.setItem('redemptions', JSON.stringify(redemptions));
   
-  document.getElementById('redeemMessage').textContent = messages[type] + ' redeemed!';
-  document.getElementById('redeemModal').classList.add('active');
+  document.getElementById('redeemForm').style.display = 'none';
+  document.getElementById('redeemTitle').textContent = '✅ Redemption Successful!';
+  document.getElementById('redeemMessage').textContent = `${type} - ₹${cashValue} redeemed!`;
+  document.getElementById('redeemNote').textContent = 'Your payment request has been submitted. You will receive payment within 24-48 hours on your registered payment method.';
   
   updateUI();
+  currentRedemption = null;
 }
 
 function closeRedeemModal() {
   document.getElementById('redeemModal').classList.remove('active');
+  currentRedemption = null;
 }
 
 function watchAd() {
@@ -311,6 +468,8 @@ function dailyCheckin() {
   alert('✅ Daily Check-in Bonus!\n\n+300 Points\n+3 Free Spins\n\nCome back tomorrow for more!');
 }
 
+// Initialize
+checkRegistration();
 updateUI();
 </script>
 
