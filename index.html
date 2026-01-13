@@ -13,13 +13,33 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 
 .header { background: rgba(255,255,255,0.95); padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
 .header h1 { color: #667eea; font-size: 24px; }
-.points { background: #ffd43b; color: #333; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+.points { background: #ffd43b; color: #333; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
 
 .container { max-width: 600px; margin: 20px auto; padding: 20px; }
 
-.wheel-container { background: white; border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+.wheel-container { background: white; border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 20px; }
 .wheel { width: 300px; height: 300px; margin: 20px auto; position: relative; border-radius: 50%; border: 10px solid #ffd43b; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); }
-.spin-btn { background: linear-gradient(135deg, #ff6b6b, #ff8787); color: white; border: none; padding: 15px 50px; font-size: 20px; font-weight: bold; border-radius: 50px; cursor: pointer; margin-top: 20px; }
+.wheel-segment { position: absolute; width: 50%; height: 50%; transform-origin: 100% 100%; clip-path: polygon(0 0, 100% 0, 100% 100%); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; color: white; }
+.pointer { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 40px solid #ff6b6b; z-index: 10; }
+.spin-btn { background: linear-gradient(135deg, #ff6b6b, #ff8787); color: white; border: none; padding: 15px 50px; font-size: 20px; font-weight: bold; border-radius: 50px; cursor: pointer; margin-top: 20px; box-shadow: 0 5px 15px rgba(255,107,107,0.4); }
+.spin-btn:disabled { background: #ccc; cursor: not-allowed; }
+.spins-left { margin-top: 15px; color: #666; font-size: 16px; }
+
+.tasks { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+.tasks h2 { margin-bottom: 15px; color: #333; }
+.task-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; border-radius: 10px; margin-bottom: 10px; }
+.task-btn { background: #51cf66; color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; }
+
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
+.modal.active { display: flex; }
+.modal-content { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 400px; width: 90%; }
+.modal h2 { color: #51cf66; font-size: 32px; margin-bottom: 20px; }
+.modal-close { background: #667eea; color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; margin-top: 20px; font-size: 16px; }
+
+@media (max-width: 600px) {
+  .wheel { width: 250px; height: 250px; }
+  .container { padding: 10px; }
+}
 </style>
 </head>
 <body>
@@ -34,10 +54,134 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 <div class="container">
   <div class="wheel-container">
     <h2>🎡 Spin & Win Points!</h2>
-    <div class="wheel" id="wheel"></div>
-    <button class="spin-btn" onclick="alert('Game is loading...')">SPIN NOW!</button>
+    <div style="position: relative;">
+      <div class="pointer"></div>
+      <div class="wheel" id="wheel">
+        <div class="wheel-segment" style="background: #ff6b6b; transform: rotate(0deg);"><span style="transform: rotate(-22.5deg);">1000</span></div>
+        <div class="wheel-segment" style="background: #51cf66; transform: rotate(45deg);"><span style="transform: rotate(-22.5deg);">50</span></div>
+        <div class="wheel-segment" style="background: #ffd43b; transform: rotate(90deg);"><span style="transform: rotate(-22.5deg);">200</span></div>
+        <div class="wheel-segment" style="background: #9775fa; transform: rotate(135deg);"><span style="transform: rotate(-22.5deg);">500</span></div>
+        <div class="wheel-segment" style="background: #ff8787; transform: rotate(180deg);"><span style="transform: rotate(-22.5deg);">100</span></div>
+        <div class="wheel-segment" style="background: #74c0fc; transform: rotate(225deg);"><span style="transform: rotate(-22.5deg);">20</span></div>
+        <div class="wheel-segment" style="background: #ffa94d; transform: rotate(270deg);"><span style="transform: rotate(-22.5deg);">150</span></div>
+        <div class="wheel-segment" style="background: #a9e34b; transform: rotate(315deg);"><span style="transform: rotate(-22.5deg);">300</span></div>
+      </div>
+    </div>
+    <button class="spin-btn" id="spinBtn" onclick="spin()">SPIN NOW!</button>
+    <div class="spins-left">Free Spins: <strong><span id="spinsLeft">5</span></strong></div>
+  </div>
+
+  <div class="tasks">
+    <h2>🎯 Earn More Points</h2>
+    <div class="task-item">
+      <div>
+        <strong>Watch Ad</strong><br>
+        <small>+100 Points</small>
+      </div>
+      <button class="task-btn" onclick="watchAd()">Watch</button>
+    </div>
+    <div class="task-item">
+      <div>
+        <strong>Invite Friend</strong><br>
+        <small>+500 Points</small>
+      </div>
+      <button class="task-btn" onclick="inviteFriend()">Invite</button>
+    </div>
+    <div class="task-item">
+      <div>
+        <strong>Daily Check-in</strong><br>
+        <small>+300 Points + 3 Spins</small>
+      </div>
+      <button class="task-btn" id="checkinBtn" onclick="dailyCheckin()">Claim</button>
+    </div>
   </div>
 </div>
+
+<div class="modal" id="winModal">
+  <div class="modal-content">
+    <h2>🎉 Congratulations!</h2>
+    <p style="font-size: 24px; margin: 20px 0;">You Won <strong style="color: #ffd43b;"><span id="winPoints">0</span> Points!</strong></p>
+    <button class="modal-close" onclick="closeModal()">Awesome!</button>
+  </div>
+</div>
+
+<script>
+let points = 0;
+let spinsLeft = 5;
+let spinning = false;
+
+const prizes = [1000, 50, 200, 500, 100, 20, 150, 300];
+
+function updateUI() {
+  document.getElementById('points').textContent = points;
+  document.getElementById('spinsLeft').textContent = spinsLeft;
+}
+
+function spin() {
+  if (spinning || spinsLeft <= 0) {
+    alert('❌ No spins left! Complete tasks to earn more spins.');
+    return;
+  }
+  
+  spinning = true;
+  spinsLeft--;
+  
+  document.getElementById('spinBtn').disabled = true;
+  
+  const wheel = document.getElementById('wheel');
+  const randomSpin = Math.floor(Math.random() * 8);
+  const degrees = 360 * 5 + (randomSpin * 45);
+  
+  wheel.style.transform = `rotate(${degrees}deg)`;
+  
+  setTimeout(() => {
+    const wonPoints = prizes[randomSpin];
+    points += wonPoints;
+    
+    document.getElementById('winPoints').textContent = wonPoints;
+    document.getElementById('winModal').classList.add('active');
+    
+    spinning = false;
+    document.getElementById('spinBtn').disabled = false;
+    updateUI();
+  }, 4000);
+  
+  updateUI();
+}
+
+function closeModal() {
+  document.getElementById('winModal').classList.remove('active');
+}
+
+function watchAd() {
+  alert('🎬 Ad Playing...\n\nThank you for watching!');
+  points += 100;
+  updateUI();
+  alert('✅ +100 Points earned!');
+}
+
+function inviteFriend() {
+  const referralCode = 'SPIN' + Math.random().toString(36).substr(2, 6).toUpperCase();
+  const shareText = `🎰 Join Spin & Earn!\n\n✅ Earn real money\n✅ Redeem vouchers\n✅ 100% FREE\n\nUse code: ${referralCode}\n\nPlay: https://johnsondelark-png.github.io/spin-and-earn-game/`;
+  
+  if (navigator.share) {
+    navigator.share({ text: shareText });
+  } else {
+    alert(`🎁 Share this:\n\n${shareText}`);
+  }
+}
+
+function dailyCheckin() {
+  points += 300;
+  spinsLeft += 3;
+  document.getElementById('checkinBtn').disabled = true;
+  document.getElementById('checkinBtn').textContent = 'Claimed!';
+  updateUI();
+  alert('✅ +300 Points\n+3 Spins');
+}
+
+updateUI();
+</script>
 
 </body>
 </html>
