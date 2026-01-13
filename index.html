@@ -13,7 +13,8 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 
 .header { background: rgba(255,255,255,0.95); padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
 .header h1 { color: #667eea; font-size: 24px; }
-.points { background: #ffd43b; color: #333; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
+.points { background: #ffd43b; color: #333; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+.balance { background: #51cf66; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; margin-left: 10px; }
 
 .container { max-width: 600px; margin: 20px auto; padding: 20px; }
 
@@ -25,7 +26,16 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 .spin-btn:disabled { background: #ccc; cursor: not-allowed; }
 .spins-left { margin-top: 15px; color: #666; font-size: 16px; }
 
-.tasks { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+.rewards-shop { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
+.rewards-shop h2 { margin-bottom: 20px; color: #333; }
+.rewards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+.reward-card { border: 2px solid #ddd; padding: 15px; border-radius: 12px; text-align: center; transition: 0.3s; }
+.reward-card:hover { border-color: #667eea; transform: scale(1.05); }
+.reward-card h4 { color: #333; margin-bottom: 8px; font-size: 14px; }
+.reward-card .price { color: #ffd43b; font-weight: bold; margin-bottom: 10px; font-size: 16px; }
+.redeem-btn { background: #51cf66; color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 12px; }
+
+.tasks { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
 .tasks h2 { margin-bottom: 15px; color: #333; }
 .task-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; border-radius: 10px; margin-bottom: 10px; }
 .task-btn { background: #51cf66; color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; }
@@ -39,6 +49,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 @media (max-width: 600px) {
   .wheel { width: 250px; height: 250px; }
   .container { padding: 10px; }
+  .rewards-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -47,12 +58,14 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 <div class="header">
   <h1>🎰 Spin & Earn</h1>
   <div>
-    <span class="points">⭐ <span id="points">0</span> Points</span>
+    <span class="points" onclick="showRewards()">⭐ <span id="points">0</span> Points</span>
+    <span class="balance">₹<span id="earnings">0</span></span>
   </div>
 </div>
 
 <div class="container">
-  <div class="wheel-container">
+  <!-- Spin Wheel Section -->
+  <div class="wheel-container" id="wheelSection">
     <h2>🎡 Spin & Win Points!</h2>
     <div style="position: relative;">
       <div class="pointer"></div>
@@ -71,7 +84,60 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
     <div class="spins-left">Free Spins: <strong><span id="spinsLeft">5</span></strong></div>
   </div>
 
-  <div class="tasks">
+  <!-- Rewards Shop Section -->
+  <div class="rewards-shop" id="rewardsSection" style="display: none;">
+    <h2>🎁 Redeem Your Points</h2>
+    <p style="color: #666; margin-bottom: 20px;">Convert your points to real money & vouchers!</p>
+    
+    <div class="rewards-grid">
+      <div class="reward-card">
+        <div style="font-size: 40px;">💳</div>
+        <h4>Paytm Cash</h4>
+        <div class="price">1000 Points = ₹10</div>
+        <button class="redeem-btn" onclick="redeemReward('paytm', 1000, 10)">Redeem</button>
+      </div>
+      
+      <div class="reward-card">
+        <div style="font-size: 40px;">🛒</div>
+        <h4>Amazon Voucher</h4>
+        <div class="price">2000 Points = ₹25</div>
+        <button class="redeem-btn" onclick="redeemReward('amazon', 2000, 25)">Redeem</button>
+      </div>
+      
+      <div class="reward-card">
+        <div style="font-size: 40px;">📱</div>
+        <h4>Mobile Recharge</h4>
+        <div class="price">1500 Points = ₹20</div>
+        <button class="redeem-btn" onclick="redeemReward('recharge', 1500, 20)">Redeem</button>
+      </div>
+      
+      <div class="reward-card">
+        <div style="font-size: 40px;">🎮</div>
+        <h4>Google Play</h4>
+        <div class="price">2500 Points = ₹30</div>
+        <button class="redeem-btn" onclick="redeemReward('googleplay', 2500, 30)">Redeem</button>
+      </div>
+      
+      <div class="reward-card">
+        <div style="font-size: 40px;">🍕</div>
+        <h4>Zomato Voucher</h4>
+        <div class="price">3000 Points = ₹40</div>
+        <button class="redeem-btn" onclick="redeemReward('zomato', 3000, 40)">Redeem</button>
+      </div>
+      
+      <div class="reward-card">
+        <div style="font-size: 40px;">🎬</div>
+        <h4>BookMyShow</h4>
+        <div class="price">2500 Points = ₹30</div>
+        <button class="redeem-btn" onclick="redeemReward('bookmyshow', 2500, 30)">Redeem</button>
+      </div>
+    </div>
+    
+    <button class="spin-btn" onclick="hideRewards()" style="margin-top: 20px; font-size: 16px; padding: 12px 30px;">Back to Game</button>
+  </div>
+
+  <!-- Tasks Section -->
+  <div class="tasks" id="tasksSection">
     <h2>🎯 Earn More Points</h2>
     <div class="task-item">
       <div>
@@ -97,6 +163,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   </div>
 </div>
 
+<!-- Win Modal -->
 <div class="modal" id="winModal">
   <div class="modal-content">
     <h2>🎉 Congratulations!</h2>
@@ -105,8 +172,20 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   </div>
 </div>
 
+<!-- Redeem Modal -->
+<div class="modal" id="redeemModal">
+  <div class="modal-content">
+    <h2>✅ Redeemed Successfully!</h2>
+    <p style="font-size: 18px; margin: 20px 0;"><span id="redeemMessage"></span></p>
+    <p style="color: #666; font-size: 14px; margin-top: 10px;">Voucher code will be sent to your registered mobile/email within 24 hours.</p>
+    <p style="color: #999; font-size: 12px; margin-top: 10px;">Note: This is a demo. Real payments will be processed after ad integration.</p>
+    <button class="modal-close" onclick="closeRedeemModal()">Done</button>
+  </div>
+</div>
+
 <script>
 let points = 0;
+let earnings = 0;
 let spinsLeft = 5;
 let spinning = false;
 
@@ -114,6 +193,7 @@ const prizes = [1000, 50, 200, 500, 100, 20, 150, 300];
 
 function updateUI() {
   document.getElementById('points').textContent = points;
+  document.getElementById('earnings').textContent = earnings;
   document.getElementById('spinsLeft').textContent = spinsLeft;
 }
 
@@ -153,21 +233,71 @@ function closeModal() {
   document.getElementById('winModal').classList.remove('active');
 }
 
+function showRewards() {
+  document.getElementById('rewardsSection').style.display = 'block';
+  document.getElementById('wheelSection').style.display = 'none';
+  document.getElementById('tasksSection').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function hideRewards() {
+  document.getElementById('rewardsSection').style.display = 'none';
+  document.getElementById('wheelSection').style.display = 'block';
+  document.getElementById('tasksSection').style.display = 'block';
+}
+
+function redeemReward(type, pointsCost, cashValue) {
+  if (points < pointsCost) {
+    alert(`❌ Not enough points!\n\nYou need ${pointsCost} points.\nYou have ${points} points.\n\nEarn more by spinning the wheel and completing tasks!`);
+    return;
+  }
+  
+  points -= pointsCost;
+  earnings += cashValue;
+  
+  const messages = {
+    paytm: `₹${cashValue} Paytm Cash`,
+    amazon: `₹${cashValue} Amazon Voucher`,
+    recharge: `₹${cashValue} Mobile Recharge`,
+    googleplay: `₹${cashValue} Google Play Credit`,
+    zomato: `₹${cashValue} Zomato Voucher`,
+    bookmyshow: `₹${cashValue} BookMyShow Voucher`
+  };
+  
+  document.getElementById('redeemMessage').textContent = messages[type] + ' redeemed!';
+  document.getElementById('redeemModal').classList.add('active');
+  
+  updateUI();
+}
+
+function closeRedeemModal() {
+  document.getElementById('redeemModal').classList.remove('active');
+}
+
 function watchAd() {
-  alert('🎬 Ad Playing...\n\nThank you for watching!');
+  alert('🎬 Ad Playing...\n\nThank you for watching!\nThis helps us keep the game FREE!');
   points += 100;
   updateUI();
-  alert('✅ +100 Points earned!');
+  alert('✅ +100 Points earned!\n\nKeep earning more!');
 }
 
 function inviteFriend() {
   const referralCode = 'SPIN' + Math.random().toString(36).substr(2, 6).toUpperCase();
-  const shareText = `🎰 Join Spin & Earn!\n\n✅ Earn real money\n✅ Redeem vouchers\n✅ 100% FREE\n\nUse code: ${referralCode}\n\nPlay: https://johnsondelark-png.github.io/spin-and-earn-game/`;
+  const shareText = `🎰 Join Spin & Earn - Win Real Money!\n\n✅ FREE to play\n✅ Earn points & redeem rewards\n✅ Paytm, Amazon, Recharge & more!\n✅ Daily bonuses\n\nUse code: ${referralCode}\n\nPlay now: https://johnsondelark-png.github.io/spin-and-earn-game/`;
   
   if (navigator.share) {
-    navigator.share({ text: shareText });
+    navigator.share({ 
+      title: 'Spin & Earn',
+      text: shareText 
+    }).then(() => {
+      points += 500;
+      updateUI();
+      alert('✅ +500 Points earned for sharing!');
+    });
   } else {
-    alert(`🎁 Share this:\n\n${shareText}`);
+    alert(`🎁 Share this message:\n\n${shareText}`);
+    points += 500;
+    updateUI();
   }
 }
 
@@ -176,8 +306,9 @@ function dailyCheckin() {
   spinsLeft += 3;
   document.getElementById('checkinBtn').disabled = true;
   document.getElementById('checkinBtn').textContent = 'Claimed!';
+  document.getElementById('checkinBtn').style.background = '#ccc';
   updateUI();
-  alert('✅ +300 Points\n+3 Spins');
+  alert('✅ Daily Check-in Bonus!\n\n+300 Points\n+3 Free Spins\n\nCome back tomorrow for more!');
 }
 
 updateUI();
