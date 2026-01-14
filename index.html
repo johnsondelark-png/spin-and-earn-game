@@ -3,314 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- SEO Meta Tags -->
-<title>Spin & Earn - Win Real Money Online | Free Paytm Cash Game 2026</title>
-<meta name="description" content="Play Spin & Earn game and win real money! Earn Paytm cash, Amazon vouchers, mobile recharge. 100% FREE to play. No investment needed. Start earning today!">
-<meta name="keywords" content="earn money online, paytm cash, free money, spin and win, online earning games, earn paytm cash, mobile recharge, amazon vouchers, work from home, side income">
-
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<title>Spin & Earn - Win Real Money Online</title>
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
 
-.loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; justify-content: center; align-items: center; z-index: 9999; }
-.loading-spinner { width: 50px; height: 50px; border: 5px solid #fff; border-top: 5px solid transparent; border-radius: 50%; animation: spin 1s linear infinite; }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-.header { background: rgba(255,255,255,0.95); padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.header { background: rgba(255,255,255,0.95); padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
 .header h1 { color: #667eea; font-size: 24px; }
-.header-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.points { background: #ffd43b; color: #333; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; }
-.balance { background: #51cf66; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
-.user-btn { background: #667eea; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; }
+.points { background: #ffd43b; color: #333; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
 
 .container { max-width: 600px; margin: 20px auto; padding: 20px; }
+
+.alert-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+.alert-box h3 { color: #856404; margin-bottom: 10px; }
 
 .wheel-container { background: white; border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 20px; }
 .wheel { width: 300px; height: 300px; margin: 20px auto; position: relative; border-radius: 50%; border: 10px solid #ffd43b; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); }
 .wheel-segment { position: absolute; width: 50%; height: 50%; transform-origin: 100% 100%; clip-path: polygon(0 0, 100% 0, 100% 100%); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; color: white; }
 .pointer { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 40px solid #ff6b6b; z-index: 10; }
-.spin-btn { background: linear-gradient(135deg, #ff6b6b, #ff8787); color: white; border: none; padding: 15px 50px; font-size: 20px; font-weight: bold; border-radius: 50px; cursor: pointer; margin-top: 20px; box-shadow: 0 5px 15px rgba(255,107,107,0.4); }
-.spin-btn:disabled { background: #ccc; cursor: not-allowed; }
+.spin-btn { background: linear-gradient(135deg, #ff6b6b, #ff8787); color: white; border: none; padding: 15px 50px; font-size: 20px; font-weight: bold; border-radius: 50px; cursor: pointer; margin-top: 20px; }
 
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; overflow-y: auto; }
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
 .modal.active { display: flex; }
-.modal-content { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 500px; width: 90%; margin: 20px; }
+.modal-content { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 500px; width: 90%; }
 .modal h2 { color: #51cf66; font-size: 32px; margin-bottom: 20px; }
-.modal-close { background: #667eea; color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; margin-top: 20px; font-size: 16px; }
-
-.form-group { margin-bottom: 15px; text-align: left; }
-.form-group label { display: block; margin-bottom: 5px; color: #333; font-weight: bold; }
-.form-group input { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 10px; font-size: 14px; }
+.modal-close { background: #667eea; color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; margin-top: 20px; }
 
 @media (max-width: 600px) {
   .wheel { width: 250px; height: 250px; }
-  .container { padding: 10px; }
 }
 </style>
 </head>
 <body>
 
-<div class="loading-screen" id="loadingScreen">
-  <div class="loading-spinner"></div>
+<div class="header">
+  <h1>🎰 Spin & Earn</h1>
+  <span class="points">⭐ <span id="points">0</span> Points</span>
 </div>
 
-<div id="app" style="display: none;">
-  <div class="header">
-    <h1>🎰 Spin & Earn</h1>
-    <div class="header-right">
-      <button class="user-btn" onclick="showProfile()" id="userBtn">Login</button>
-      <span class="points" onclick="showRewards()">⭐ <span id="points">0</span></span>
-      <span class="balance">₹<span id="earnings">0</span></span>
+<div class="container">
+  <div class="alert-box">
+    <h3>🚀 Beta Version - Local Storage Mode</h3>
+    <p>Firebase integration coming soon! Your progress is saved locally on this device.</p>
+  </div>
+
+  <div class="wheel-container">
+    <h2>🎡 Spin & Win Points!</h2>
+    <div style="position: relative;">
+      <div class="pointer"></div>
+      <div class="wheel" id="wheel">
+        <div class="wheel-segment" style="background: #ff6b6b; transform: rotate(0deg);"><span style="transform: rotate(-22.5deg);">1000</span></div>
+        <div class="wheel-segment" style="background: #51cf66; transform: rotate(45deg);"><span style="transform: rotate(-22.5deg);">50</span></div>
+        <div class="wheel-segment" style="background: #ffd43b; transform: rotate(90deg);"><span style="transform: rotate(-22.5deg);">200</span></div>
+        <div class="wheel-segment" style="background: #9775fa; transform: rotate(135deg);"><span style="transform: rotate(-22.5deg);">500</span></div>
+        <div class="wheel-segment" style="background: #ff8787; transform: rotate(180deg);"><span style="transform: rotate(-22.5deg);">100</span></div>
+        <div class="wheel-segment" style="background: #74c0fc; transform: rotate(225deg);"><span style="transform: rotate(-22.5deg);">20</span></div>
+        <div class="wheel-segment" style="background: #ffa94d; transform: rotate(270deg);"><span style="transform: rotate(-22.5deg);">150</span></div>
+        <div class="wheel-segment" style="background: #a9e34b; transform: rotate(315deg);"><span style="transform: rotate(-22.5deg);">300</span></div>
+      </div>
     </div>
-  </div>
-
-  <div class="container">
-    <div class="wheel-container">
-      <h2>🎡 Spin & Win Points!</h2>
-      <div style="position: relative;">
-        <div class="pointer"></div>
-        <div class="wheel" id="wheel">
-          <div class="wheel-segment" style="background: #ff6b6b; transform: rotate(0deg);"><span style="transform: rotate(-22.5deg);">1000</span></div>
-          <div class="wheel-segment" style="background: #51cf66; transform: rotate(45deg);"><span style="transform: rotate(-22.5deg);">50</span></div>
-          <div class="wheel-segment" style="background: #ffd43b; transform: rotate(90deg);"><span style="transform: rotate(-22.5deg);">200</span></div>
-          <div class="wheel-segment" style="background: #9775fa; transform: rotate(135deg);"><span style="transform: rotate(-22.5deg);">500</span></div>
-          <div class="wheel-segment" style="background: #ff8787; transform: rotate(180deg);"><span style="transform: rotate(-22.5deg);">100</span></div>
-          <div class="wheel-segment" style="background: #74c0fc; transform: rotate(225deg);"><span style="transform: rotate(-22.5deg);">20</span></div>
-          <div class="wheel-segment" style="background: #ffa94d; transform: rotate(270deg);"><span style="transform: rotate(-22.5deg);">150</span></div>
-          <div class="wheel-segment" style="background: #a9e34b; transform: rotate(315deg);"><span style="transform: rotate(-22.5deg);">300</span></div>
-        </div>
-      </div>
-      <button class="spin-btn" id="spinBtn" onclick="spin()">SPIN NOW!</button>
-      <div style="margin-top: 15px; color: #666;">Free Spins: <strong><span id="spinsLeft">5</span></strong></div>
-    </div>
+    <button class="spin-btn" id="spinBtn" onclick="spin()">SPIN NOW!</button>
+    <div style="margin-top: 15px; color: #666;">Free Spins: <strong><span id="spinsLeft">5</span></strong></div>
   </div>
 </div>
 
-<!-- Login Modal -->
-<div class="modal" id="loginModal">
-  <div class="modal-content">
-    <h2>🔐 Login to Play</h2>
-    <p style="color: #666; margin-bottom: 20px;">Sign in to save your progress!</p>
-    
-    <form id="loginForm" onsubmit="loginUser(event)">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="loginEmail" required placeholder="your@email.com">
-      </div>
-      
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="loginPassword" required placeholder="Enter password">
-      </div>
-      
-      <button type="submit" class="spin-btn" style="width: 100%; margin-top: 10px;">Login</button>
-    </form>
-    
-    <p style="margin-top: 20px; color: #666;">Don't have an account? <a href="#" onclick="showSignup()" style="color: #667eea; font-weight: bold;">Sign Up</a></p>
-  </div>
-</div>
-
-<!-- Signup Modal -->
-<div class="modal" id="signupModal">
-  <div class="modal-content">
-    <h2>📝 Create Account</h2>
-    <p style="color: #666; margin-bottom: 20px;">Get 1000 bonus points on signup!</p>
-    
-    <form id="signupForm" onsubmit="signupUser(event)">
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" id="signupName" required placeholder="Enter your name">
-      </div>
-      
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="signupEmail" required placeholder="your@email.com">
-      </div>
-      
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="signupPassword" required placeholder="Min 6 characters" minlength="6">
-      </div>
-      
-      <button type="submit" class="spin-btn" style="width: 100%; margin-top: 10px;">Sign Up & Get 1000 Points!</button>
-    </form>
-    
-    <p style="margin-top: 20px; color: #666;">Already have an account? <a href="#" onclick="showLogin()" style="color: #667eea; font-weight: bold;">Login</a></p>
-  </div>
-</div>
-
-<!-- Win Modal -->
 <div class="modal" id="winModal">
   <div class="modal-content">
     <h2>🎉 Congratulations!</h2>
     <p style="font-size: 24px; margin: 20px 0;">You Won <strong style="color: #ffd43b;"><span id="winPoints">0</span> Points!</strong></p>
-    <button class="modal-close" onclick="closeWinModal()">Awesome!</button>
+    <button class="modal-close" onclick="closeModal()">Awesome!</button>
   </div>
 </div>
 
 <script>
-// Firebase Configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDhYjIJkolN1hKSt-MvKjoaeyTcVnJHPDQ",
-  authDomain: "spin-and-earn-6c77e.firebaseapp.com",
-  projectId: "spin-and-earn-6c77e",
-  storageBucket: "spin-and-earn-6c77e.firebasestorage.app",
-  messagingSenderId: "14960823007",
-  appId: "1:14960823007:web:7ef8f1f6cdf9011933f76a"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
-
-// Global variables
-let currentUser = null;
-let points = 0;
-let earnings = 0;
-let spinsLeft = 5;
+let points = parseInt(localStorage.getItem('points') || '1000');
+let spinsLeft = parseInt(localStorage.getItem('spinsLeft') || '5');
 let spinning = false;
 const prizes = [1000, 50, 200, 500, 100, 20, 150, 300];
 
-// Auth state observer
-auth.onAuthStateChanged(async (user) => {
-  document.getElementById('loadingScreen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  
-  if (user) {
-    currentUser = user;
-    document.getElementById('userBtn').textContent = user.displayName || user.email.split('@')[0];
-    await loadUserData();
-  } else {
-    document.getElementById('loginModal').classList.add('active');
-  }
-});
-
-// Load user data from Firestore
-async function loadUserData() {
-  try {
-    const userDoc = await db.collection('users').doc(currentUser.uid).get();
-    
-    if (userDoc.exists) {
-      const data = userDoc.data();
-      points = data.points || 0;
-      earnings = data.earnings || 0;
-      spinsLeft = data.spinsLeft || 5;
-    } else {
-      // New user - create profile with bonus
-      await db.collection('users').doc(currentUser.uid).set({
-        name: currentUser.displayName || 'User',
-        email: currentUser.email,
-        points: 1000,
-        earnings: 0,
-        spinsLeft: 5,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        referralCode: generateReferralCode()
-      });
-      points = 1000;
-      alert('🎁 Welcome! 1000 Bonus Points Added!');
-    }
-    
-    updateUI();
-  } catch (error) {
-    console.error('Error loading user data:', error);
-  }
-}
-
-// Save user data to Firestore
-async function saveUserData() {
-  if (!currentUser) return;
-  
-  try {
-    await db.collection('users').doc(currentUser.uid).update({
-      points: points,
-      earnings: earnings,
-      spinsLeft: spinsLeft,
-      lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-    });
-  } catch (error) {
-    console.error('Error saving user data:', error);
-  }
-}
-
-// Login user
-async function loginUser(event) {
-  event.preventDefault();
-  
-  const email = document.getElementById('loginEmail').value;
-  const password = document.getElementById('loginPassword').value;
-  
-  try {
-    await auth.signInWithEmailAndPassword(email, password);
-    document.getElementById('loginModal').classList.remove('active');
-    alert('✅ Login successful!');
-  } catch (error) {
-    alert('❌ Login failed: ' + error.message);
-  }
-}
-
-// Signup user
-async function signupUser(event) {
-  event.preventDefault();
-  
-  const name = document.getElementById('signupName').value;
-  const email = document.getElementById('signupEmail').value;
-  const password = document.getElementById('signupPassword').value;
-  
-  try {
-    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-    await userCredential.user.updateProfile({ displayName: name });
-    document.getElementById('signupModal').classList.remove('active');
-    alert('✅ Account created! Welcome!');
-  } catch (error) {
-    alert('❌ Signup failed: ' + error.message);
-  }
-}
-
-// Show login modal
-function showLogin() {
-  document.getElementById('signupModal').classList.remove('active');
-  document.getElementById('loginModal').classList.add('active');
-}
-
-// Show signup modal
-function showSignup() {
-  document.getElementById('loginModal').classList.remove('active');
-  document.getElementById('signupModal').classList.add('active');
-}
-
-// Show profile
-function showProfile() {
-  if (currentUser) {
-    alert(`👤 Profile\n\nName: ${currentUser.displayName}\nEmail: ${currentUser.email}\nPoints: ${points}\nEarnings: ₹${earnings}`);
-  } else {
-    showLogin();
-  }
-}
-
-// Update UI
 function updateUI() {
   document.getElementById('points').textContent = points;
-  document.getElementById('earnings').textContent = earnings;
   document.getElementById('spinsLeft').textContent = spinsLeft;
+  localStorage.setItem('points', points);
+  localStorage.setItem('spinsLeft', spinsLeft);
 }
 
-// Spin wheel
-async function spin() {
-  if (!currentUser) {
-    alert('⚠️ Please login first!');
-    showLogin();
-    return;
-  }
-  
+function spin() {
   if (spinning || spinsLeft <= 0) {
-    alert('❌ No spins left! Complete tasks to earn more spins.');
+    alert('❌ No spins left! Share with friends to earn more spins.');
     return;
   }
   
@@ -324,7 +105,7 @@ async function spin() {
   
   wheel.style.transform = `rotate(${degrees}deg)`;
   
-  setTimeout(async () => {
+  setTimeout(() => {
     const wonPoints = prizes[randomSpin];
     points += wonPoints;
     
@@ -334,33 +115,16 @@ async function spin() {
     spinning = false;
     document.getElementById('spinBtn').disabled = false;
     updateUI();
-    
-    await saveUserData();
   }, 4000);
   
   updateUI();
-  await saveUserData();
 }
 
-// Close win modal
-function closeWinModal() {
+function closeModal() {
   document.getElementById('winModal').classList.remove('active');
 }
 
-// Show rewards
-function showRewards() {
-  if (!currentUser) {
-    alert('⚠️ Please login first!');
-    showLogin();
-    return;
-  }
-  alert('🎁 Rewards Shop\n\nComing soon!\nYou have ' + points + ' points.');
-}
-
-// Generate referral code
-function generateReferralCode() {
-  return 'SPIN' + Math.random().toString(36).substr(2, 6).toUpperCase();
-}
+updateUI();
 </script>
 
 </body>
