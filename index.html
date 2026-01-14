@@ -8,75 +8,28 @@
 <title>Spin & Earn - Win Real Money Online | Free Paytm Cash Game 2026</title>
 <meta name="description" content="Play Spin & Earn game and win real money! Earn Paytm cash, Amazon vouchers, mobile recharge. 100% FREE to play. No investment needed. Start earning today!">
 <meta name="keywords" content="earn money online, paytm cash, free money, spin and win, online earning games, earn paytm cash, mobile recharge, amazon vouchers, work from home, side income">
-<meta name="author" content="Spin & Earn">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://johnsondelark-png.github.io/spin-and-earn-game/">
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://johnsondelark-png.github.io/spin-and-earn-game/">
-<meta property="og:title" content="Spin & Earn - Win Real Money Online | Free Paytm Cash">
-<meta property="og:description" content="Play FREE and earn real money! Win Paytm cash, Amazon vouchers & more. Join 10,000+ users earning daily!">
-<meta property="og:image" content="https://johnsondelark-png.github.io/spin-and-earn-game/og-image.jpg">
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://johnsondelark-png.github.io/spin-and-earn-game/">
-<meta property="twitter:title" content="Spin & Earn - Win Real Money Online">
-<meta property="twitter:description" content="Play FREE and earn real money! Win Paytm cash, Amazon vouchers & more!">
-<meta property="twitter:image" content="https://johnsondelark-png.github.io/spin-and-earn-game/og-image.jpg">
-
-<!-- PWA -->
-<meta name="theme-color" content="#667eea">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-<!-- Ad Network Verification -->
-<meta name="monetag" content="4109dc8f2ad8fcc86ad8833f8f6b1549">
-<meta name="c1d84e0c273bffada632d1cc066b3a11689a9462" content="c1d84e0c273bffada632d1cc066b3a11689a9462" />
-
-<!-- Structured Data for SEO -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Spin & Earn",
-  "description": "Free online game to earn real money through Paytm, Amazon vouchers and mobile recharge",
-  "url": "https://johnsondelark-ng.github.io/spin-and-earn-game/",
-  "applicationCategory": "GameApplication",
-  "operatingSystem": "Any",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "INR"
-  }
-}
-</script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+
+.loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; justify-content: center; align-items: center; z-index: 9999; }
+.loading-spinner { width: 50px; height: 50px; border: 5px solid #fff; border-top: 5px solid transparent; border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
 .header { background: rgba(255,255,255,0.95); padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
 .header h1 { color: #667eea; font-size: 24px; }
 .header-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .points { background: #ffd43b; color: #333; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; }
 .balance { background: #51cf66; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
-.register-btn { background: #ff6b6b; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; }
+.user-btn { background: #667eea; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; }
 
 .container { max-width: 600px; margin: 20px auto; padding: 20px; }
-
-.alert-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
-.alert-box h3 { color: #856404; margin-bottom: 10px; }
-.alert-box p { color: #856404; font-size: 14px; }
-.alert-box button { background: #ffc107; color: #000; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-
-.leaderboard { background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-.leaderboard h2 { margin-bottom: 15px; color: #333; text-align: center; }
-.leaderboard-item { display: flex; justify-content: space-between; padding: 10px; background: #f8f9fa; border-radius: 10px; margin-bottom: 8px; align-items: center; }
-.leaderboard-rank { font-size: 24px; font-weight: bold; width: 40px; }
-.leaderboard-name { flex: 1; font-weight: 600; }
-.leaderboard-points { color: #ffd43b; font-weight: bold; }
 
 .wheel-container { background: white; border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 20px; }
 .wheel { width: 300px; height: 300px; margin: 20px auto; position: relative; border-radius: 50%; border: 10px solid #ffd43b; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); }
@@ -84,28 +37,6 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 .pointer { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 40px solid #ff6b6b; z-index: 10; }
 .spin-btn { background: linear-gradient(135deg, #ff6b6b, #ff8787); color: white; border: none; padding: 15px 50px; font-size: 20px; font-weight: bold; border-radius: 50px; cursor: pointer; margin-top: 20px; box-shadow: 0 5px 15px rgba(255,107,107,0.4); }
 .spin-btn:disabled { background: #ccc; cursor: not-allowed; }
-.spins-left { margin-top: 15px; color: #666; font-size: 16px; }
-
-.rewards-shop { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
-.rewards-shop h2 { margin-bottom: 20px; color: #333; }
-.rewards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-.reward-card { border: 2px solid #ddd; padding: 15px; border-radius: 12px; text-align: center; transition: 0.3s; }
-.reward-card:hover { border-color: #667eea; transform: scale(1.05); }
-.reward-card h4 { color: #333; margin-bottom: 8px; font-size: 14px; }
-.reward-card .price { color: #ffd43b; font-weight: bold; margin-bottom: 10px; font-size: 16px; }
-.redeem-btn { background: #51cf66; color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 12px; }
-
-.tasks { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
-.tasks h2 { margin-bottom: 15px; color: #333; }
-.task-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; border-radius: 10px; margin-bottom: 10px; }
-.task-btn { background: #51cf66; color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; }
-
-.share-buttons { display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap; }
-.share-btn { padding: 10px 20px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; color: white; }
-.share-whatsapp { background: #25D366; }
-.share-facebook { background: #1877F2; }
-.share-twitter { background: #1DA1F2; }
-.share-copy { background: #667eea; }
 
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; overflow-y: auto; }
 .modal.active { display: flex; }
@@ -115,245 +46,102 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 
 .form-group { margin-bottom: 15px; text-align: left; }
 .form-group label { display: block; margin-bottom: 5px; color: #333; font-weight: bold; }
-.form-group input, .form-group select { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 10px; font-size: 14px; }
-.form-group input:focus, .form-group select:focus { outline: none; border-color: #667eea; }
+.form-group input { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 10px; font-size: 14px; }
 
 @media (max-width: 600px) {
   .wheel { width: 250px; height: 250px; }
   .container { padding: 10px; }
-  .rewards-grid { grid-template-columns: 1fr; }
-  .header h1 { font-size: 20px; width: 100%; margin-bottom: 10px; }
 }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>🎰 Spin & Earn</h1>
-  <div class="header-right">
-    <button class="register-btn" onclick="showRegister()" id="registerBtn">Register</button>
-    <span class="points" onclick="showRewards()">⭐ <span id="points">0</span></span>
-    <span class="balance">₹<span id="earnings">0</span></span>
-  </div>
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-spinner"></div>
 </div>
 
-<div class="container">
-  <!-- Registration Alert -->
-  <div class="alert-box" id="registerAlert">
-    <h3>🎁 Get 1000 Bonus Points!</h3>
-    <p>Register now and get 1000 FREE points instantly! Plus earn 1000 points for each friend you invite!</p>
-    <button onclick="showRegister()">Register & Get Bonus!</button>
-  </div>
-
-  <!-- Leaderboard -->
-  <div class="leaderboard">
-    <h2>🏆 Top Earners This Week</h2>
-    <div class="leaderboard-item">
-      <div class="leaderboard-rank">🥇</div>
-      <div class="leaderboard-name">Rahul K.</div>
-      <div class="leaderboard-points">₹2,450</div>
-    </div>
-    <div class="leaderboard-item">
-      <div class="leaderboard-rank">🥈</div>
-      <div class="leaderboard-name">Priya S.</div>
-      <div class="leaderboard-points">₹1,890</div>
-    </div>
-    <div class="leaderboard-item">
-      <div class="leaderboard-rank">🥉</div>
-      <div class="leaderboard-name">Amit P.</div>
-      <div class="leaderboard-points">₹1,560</div>
-    </div>
-    <div style="text-align: center; margin-top: 15px; color: #666; font-size: 14px;">
-      <strong>You:</strong> Rank #<span id="userRank">--</span> | ₹<span id="userEarnings">0</span>
+<div id="app" style="display: none;">
+  <div class="header">
+    <h1>🎰 Spin & Earn</h1>
+    <div class="header-right">
+      <button class="user-btn" onclick="showProfile()" id="userBtn">Login</button>
+      <span class="points" onclick="showRewards()">⭐ <span id="points">0</span></span>
+      <span class="balance">₹<span id="earnings">0</span></span>
     </div>
   </div>
 
-  <!-- Spin Wheel Section -->
-  <div class="wheel-container" id="wheelSection">
-    <h2>🎡 Spin & Win Points!</h2>
-    <div style="position: relative;">
-      <div class="pointer"></div>
-      <div class="wheel" id="wheel">
-        <div class="wheel-segment" style="background: #ff6b6b; transform: rotate(0deg);"><span style="transform: rotate(-22.5deg);">1000</span></div>
-        <div class="wheel-segment" style="background: #51cf66; transform: rotate(45deg);"><span style="transform: rotate(-22.5deg);">50</span></div>
-        <div class="wheel-segment" style="background: #ffd43b; transform: rotate(90deg);"><span style="transform: rotate(-22.5deg);">200</span></div>
-        <div class="wheel-segment" style="background: #9775fa; transform: rotate(135deg);"><span style="transform: rotate(-22.5deg);">500</span></div>
-        <div class="wheel-segment" style="background: #ff8787; transform: rotate(180deg);"><span style="transform: rotate(-22.5deg);">100</span></div>
-        <div class="wheel-segment" style="background: #74c0fc; transform: rotate(225deg);"><span style="transform: rotate(-22.5deg);">20</span></div>
-        <div class="wheel-segment" style="background: #ffa94d; transform: rotate(270deg);"><span style="transform: rotate(-22.5deg);">150</span></div>
-        <div class="wheel-segment" style="background: #a9e34b; transform: rotate(315deg);"><span style="transform: rotate(-22.5deg);">300</span></div>
+  <div class="container">
+    <div class="wheel-container">
+      <h2>🎡 Spin & Win Points!</h2>
+      <div style="position: relative;">
+        <div class="pointer"></div>
+        <div class="wheel" id="wheel">
+          <div class="wheel-segment" style="background: #ff6b6b; transform: rotate(0deg);"><span style="transform: rotate(-22.5deg);">1000</span></div>
+          <div class="wheel-segment" style="background: #51cf66; transform: rotate(45deg);"><span style="transform: rotate(-22.5deg);">50</span></div>
+          <div class="wheel-segment" style="background: #ffd43b; transform: rotate(90deg);"><span style="transform: rotate(-22.5deg);">200</span></div>
+          <div class="wheel-segment" style="background: #9775fa; transform: rotate(135deg);"><span style="transform: rotate(-22.5deg);">500</span></div>
+          <div class="wheel-segment" style="background: #ff8787; transform: rotate(180deg);"><span style="transform: rotate(-22.5deg);">100</span></div>
+          <div class="wheel-segment" style="background: #74c0fc; transform: rotate(225deg);"><span style="transform: rotate(-22.5deg);">20</span></div>
+          <div class="wheel-segment" style="background: #ffa94d; transform: rotate(270deg);"><span style="transform: rotate(-22.5deg);">150</span></div>
+          <div class="wheel-segment" style="background: #a9e34b; transform: rotate(315deg);"><span style="transform: rotate(-22.5deg);">300</span></div>
+        </div>
       </div>
-    </div>
-    <button class="spin-btn" id="spinBtn" onclick="spin()">SPIN NOW!</button>
-    <div class="spins-left">Free Spins: <strong><span id="spinsLeft">5</span></strong></div>
-  </div>
-
-  <!-- Rewards Shop Section -->
-  <div class="rewards-shop" id="rewardsSection" style="display: none;">
-    <h2>🎁 Redeem Your Points</h2>
-    <p style="color: #666; margin-bottom: 20px;">Convert your points to real money & vouchers!</p>
-    
-    <div class="rewards-grid">
-      <div class="reward-card">
-        <div style="font-size: 40px;">💳</div>
-        <h4>Paytm Cash</h4>
-        <div class="price">1000 Points = ₹10</div>
-        <button class="redeem-btn" onclick="redeemReward('Paytm Cash', 1000, 10)">Redeem</button>
-      </div>
-      
-      <div class="reward-card">
-        <div style="font-size: 40px;">🛒</div>
-        <h4>Amazon Voucher</h4>
-        <div class="price">2000 Points = ₹25</div>
-        <button class="redeem-btn" onclick="redeemReward('Amazon Voucher', 2000, 25)">Redeem</button>
-      </div>
-      
-      <div class="reward-card">
-        <div style="font-size: 40px;">📱</div>
-        <h4>Mobile Recharge</h4>
-        <div class="price">1500 Points = ₹20</div>
-        <button class="redeem-btn" onclick="redeemReward('Mobile Recharge', 1500, 20)">Redeem</button>
-      </div>
-      
-      <div class="reward-card">
-        <div style="font-size: 40px;">🎮</div>
-        <h4>Google Play</h4>
-        <div class="price">2500 Points = ₹30</div>
-        <button class="redeem-btn" onclick="redeemReward('Google Play', 2500, 30)">Redeem</button>
-      </div>
-    </div>
-    
-    <button class="spin-btn" onclick="hideRewards()" style="margin-top: 20px; font-size: 16px; padding: 12px 30px;">Back to Game</button>
-  </div>
-
-  <!-- Tasks Section -->
-  <div class="tasks" id="tasksSection">
-    <h2>🎯 Earn More Points</h2>
-    <div class="task-item">
-      <div>
-        <strong>Invite Friend</strong><br>
-        <small>+1000 Points per friend!</small>
-      </div>
-      <button class="task-btn" onclick="inviteFriend()">Invite</button>
-    </div>
-    <div class="task-item">
-      <div>
-        <strong>Watch Ad</strong><br>
-        <small>+100 Points</small>
-      </div>
-      <button class="task-btn" onclick="watchAd()">Watch</button>
-    </div>
-    <div class="task-item">
-      <div>
-        <strong>Daily Check-in</strong><br>
-        <small>+300 Points + 3 Spins</small>
-      </div>
-      <button class="task-btn" id="checkinBtn" onclick="dailyCheckin()">Claim</button>
-    </div>
-    <div class="task-item">
-      <div>
-        <strong>Share on Social Media</strong><br>
-        <small>+500 Points</small>
-      </div>
-      <button class="task-btn" onclick="shareOnSocial()">Share</button>
+      <button class="spin-btn" id="spinBtn" onclick="spin()">SPIN NOW!</button>
+      <div style="margin-top: 15px; color: #666;">Free Spins: <strong><span id="spinsLeft">5</span></strong></div>
     </div>
   </div>
 </div>
 
-<!-- Registration Modal -->
-<div class="modal" id="registerModal">
+<!-- Login Modal -->
+<div class="modal" id="loginModal">
   <div class="modal-content">
-    <h2>📝 Register & Get 1000 Points!</h2>
-    <p style="color: #666; margin-bottom: 20px;">Join 10,000+ users earning daily!</p>
+    <h2>🔐 Login to Play</h2>
+    <p style="color: #666; margin-bottom: 20px;">Sign in to save your progress!</p>
     
-    <form id="registerForm" onsubmit="submitRegistration(event)">
+    <form id="loginForm" onsubmit="loginUser(event)">
       <div class="form-group">
-        <label>Full Name *</label>
-        <input type="text" id="regName" required placeholder="Enter your full name">
+        <label>Email</label>
+        <input type="email" id="loginEmail" required placeholder="your@email.com">
       </div>
       
       <div class="form-group">
-        <label>Email *</label>
-        <input type="email" id="regEmail" required placeholder="your@email.com">
+        <label>Password</label>
+        <input type="password" id="loginPassword" required placeholder="Enter password">
       </div>
       
-      <div class="form-group">
-        <label>Mobile Number *</label>
-        <input type="tel" id="regMobile" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
-      </div>
-      
-      <div class="form-group">
-        <label>Payment Method *</label>
-        <select id="regPayment" required>
-          <option value="">Select payment method</option>
-          <option value="Paytm">Paytm</option>
-          <option value="UPI">UPI (Google Pay/PhonePe)</option>
-          <option value="Bank Transfer">Bank Transfer</option>
-        </select>
-      </div>
-      
-      <div class="form-group">
-        <label>Paytm/UPI ID *</label>
-        <input type="text" id="regUPI" required placeholder="9876543210@paytm or UPI ID">
-      </div>
-      
-      <div class="form-group">
-        <label>Referral Code (Optional)</label>
-        <input type="text" id="regReferral" placeholder="Enter friend's referral code">
-      </div>
-      
-      <button type="submit" class="spin-btn" style="width: 100%; margin-top: 10px;">Register & Get 1000 Points!</button>
+      <button type="submit" class="spin-btn" style="width: 100%; margin-top: 10px;">Login</button>
     </form>
     
-    <button class="modal-close" onclick="closeRegister()">Cancel</button>
+    <p style="margin-top: 20px; color: #666;">Don't have an account? <a href="#" onclick="showSignup()" style="color: #667eea; font-weight: bold;">Sign Up</a></p>
   </div>
 </div>
 
-<!-- Share Modal -->
-<div class="modal" id="shareModal">
+<!-- Signup Modal -->
+<div class="modal" id="signupModal">
   <div class="modal-content">
-    <h2>📢 Share & Earn 1000 Points!</h2>
-    <p style="color: #666; margin-bottom: 20px;">Your Referral Code: <strong id="refCode" style="color: #667eea; font-size: 24px;">LOADING...</strong></p>
+    <h2>📝 Create Account</h2>
+    <p style="color: #666; margin-bottom: 20px;">Get 1000 bonus points on signup!</p>
     
-    <div class="share-buttons">
-      <button class="share-btn share-whatsapp" onclick="shareWhatsApp()">
-        📱 WhatsApp
-      </button>
-      <button class="share-btn share-facebook" onclick="shareFacebook()">
-        👥 Facebook
-      </button>
-      <button class="share-btn share-twitter" onclick="shareTwitter()">
-        🐦 Twitter
-      </button>
-      <button class="share-btn share-copy" onclick="copyLink()">
-        📋 Copy Link
-      </button>
-    </div>
-    
-    <p style="color: #999; font-size: 12px; margin-top: 20px;">Earn 1000 points for each friend who registers using your code!</p>
-    
-    <button class="modal-close" onclick="closeShareModal()">Close</button>
-  </div>
-</div>
-
-<!-- Redemption Modal -->
-<div class="modal" id="redeemModal">
-  <div class="modal-content">
-    <h2 id="redeemTitle">🎁 Redeem Reward</h2>
-    <p id="redeemMessage" style="font-size: 18px; margin: 20px 0;"></p>
-    
-    <div id="redeemForm" style="display: none;">
-      <p style="color: #666; margin-bottom: 15px;">Confirm your redemption details:</p>
-      <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left;">
-        <p><strong>Reward:</strong> <span id="rewardType"></span></p>
-        <p><strong>Value:</strong> ₹<span id="rewardValue"></span></p>
-        <p><strong>Points:</strong> <span id="rewardPoints"></span></p>
+    <form id="signupForm" onsubmit="signupUser(event)">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="signupName" required placeholder="Enter your name">
       </div>
-      <button class="spin-btn" onclick="confirmRedemption()" style="width: 100%;">Confirm Redemption</button>
-    </div>
+      
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="signupEmail" required placeholder="your@email.com">
+      </div>
+      
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="signupPassword" required placeholder="Min 6 characters" minlength="6">
+      </div>
+      
+      <button type="submit" class="spin-btn" style="width: 100%; margin-top: 10px;">Sign Up & Get 1000 Points!</button>
+    </form>
     
-    <p id="redeemNote" style="color: #999; font-size: 12px; margin-top: 15px;"></p>
-    <button class="modal-close" onclick="closeRedeemModal()">Close</button>
+    <p style="margin-top: 20px; color: #666;">Already have an account? <a href="#" onclick="showLogin()" style="color: #667eea; font-weight: bold;">Login</a></p>
   </div>
 </div>
 
@@ -362,55 +150,165 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   <div class="modal-content">
     <h2>🎉 Congratulations!</h2>
     <p style="font-size: 24px; margin: 20px 0;">You Won <strong style="color: #ffd43b;"><span id="winPoints">0</span> Points!</strong></p>
-    <button class="modal-close" onclick="closeModal()">Awesome!</button>
+    <button class="modal-close" onclick="closeWinModal()">Awesome!</button>
   </div>
 </div>
 
 <script>
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDhYjIJkolN1hKSt-MvKjoaeyTcVnJHPDQ",
+  authDomain: "spin-and-earn-6c77e.firebaseapp.com",
+  projectId: "spin-and-earn-6c77e",
+  storageBucket: "spin-and-earn-6c77e.firebasestorage.app",
+  messagingSenderId: "14960823007",
+  appId: "1:14960823007:web:7ef8f1f6cdf9011933f76a"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// Global variables
+let currentUser = null;
 let points = 0;
 let earnings = 0;
 let spinsLeft = 5;
 let spinning = false;
-let isRegistered = false;
-let currentRedemption = null;
-let referralCode = '';
-
 const prizes = [1000, 50, 200, 500, 100, 20, 150, 300];
 
-function generateReferralCode() {
-  return 'SPIN' + Math.random().toString(36).substr(2, 6).toUpperCase();
-}
-
-function checkRegistration() {
-  const registered = localStorage.getItem('userRegistered');
-  if (registered === 'true') {
-    isRegistered = true;
-    document.getElementById('registerAlert').style.display = 'none';
-    document.getElementById('registerBtn').textContent = '✓ Registered';
-    document.getElementById('registerBtn').style.background = '#51cf66';
-    
-    referralCode = localStorage.getItem('referralCode') || generateReferralCode();
-    localStorage.setItem('referralCode', referralCode);
+// Auth state observer
+auth.onAuthStateChanged(async (user) => {
+  document.getElementById('loadingScreen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  
+  if (user) {
+    currentUser = user;
+    document.getElementById('userBtn').textContent = user.displayName || user.email.split('@')[0];
+    await loadUserData();
+  } else {
+    document.getElementById('loginModal').classList.add('active');
   }
-  
-  const savedPoints = localStorage.getItem('userPoints');
-  if (savedPoints) points = parseInt(savedPoints);
-  
-  const savedEarnings = localStorage.getItem('userEarnings');
-  if (savedEarnings) earnings = parseInt(savedEarnings);
+});
+
+// Load user data from Firestore
+async function loadUserData() {
+  try {
+    const userDoc = await db.collection('users').doc(currentUser.uid).get();
+    
+    if (userDoc.exists) {
+      const data = userDoc.data();
+      points = data.points || 0;
+      earnings = data.earnings || 0;
+      spinsLeft = data.spinsLeft || 5;
+    } else {
+      // New user - create profile with bonus
+      await db.collection('users').doc(currentUser.uid).set({
+        name: currentUser.displayName || 'User',
+        email: currentUser.email,
+        points: 1000,
+        earnings: 0,
+        spinsLeft: 5,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        referralCode: generateReferralCode()
+      });
+      points = 1000;
+      alert('🎁 Welcome! 1000 Bonus Points Added!');
+    }
+    
+    updateUI();
+  } catch (error) {
+    console.error('Error loading user data:', error);
+  }
 }
 
+// Save user data to Firestore
+async function saveUserData() {
+  if (!currentUser) return;
+  
+  try {
+    await db.collection('users').doc(currentUser.uid).update({
+      points: points,
+      earnings: earnings,
+      spinsLeft: spinsLeft,
+      lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  } catch (error) {
+    console.error('Error saving user data:', error);
+  }
+}
+
+// Login user
+async function loginUser(event) {
+  event.preventDefault();
+  
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  
+  try {
+    await auth.signInWithEmailAndPassword(email, password);
+    document.getElementById('loginModal').classList.remove('active');
+    alert('✅ Login successful!');
+  } catch (error) {
+    alert('❌ Login failed: ' + error.message);
+  }
+}
+
+// Signup user
+async function signupUser(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('signupName').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
+  
+  try {
+    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+    await userCredential.user.updateProfile({ displayName: name });
+    document.getElementById('signupModal').classList.remove('active');
+    alert('✅ Account created! Welcome!');
+  } catch (error) {
+    alert('❌ Signup failed: ' + error.message);
+  }
+}
+
+// Show login modal
+function showLogin() {
+  document.getElementById('signupModal').classList.remove('active');
+  document.getElementById('loginModal').classList.add('active');
+}
+
+// Show signup modal
+function showSignup() {
+  document.getElementById('loginModal').classList.remove('active');
+  document.getElementById('signupModal').classList.add('active');
+}
+
+// Show profile
+function showProfile() {
+  if (currentUser) {
+    alert(`👤 Profile\n\nName: ${currentUser.displayName}\nEmail: ${currentUser.email}\nPoints: ${points}\nEarnings: ₹${earnings}`);
+  } else {
+    showLogin();
+  }
+}
+
+// Update UI
 function updateUI() {
   document.getElementById('points').textContent = points;
   document.getElementById('earnings').textContent = earnings;
   document.getElementById('spinsLeft').textContent = spinsLeft;
-  document.getElementById('userEarnings').textContent = earnings;
-  
-  localStorage.setItem('userPoints', points);
-  localStorage.setItem('userEarnings', earnings);
 }
 
-function spin() {
+// Spin wheel
+async function spin() {
+  if (!currentUser) {
+    alert('⚠️ Please login first!');
+    showLogin();
+    return;
+  }
+  
   if (spinning || spinsLeft <= 0) {
     alert('❌ No spins left! Complete tasks to earn more spins.');
     return;
@@ -426,7 +324,7 @@ function spin() {
   
   wheel.style.transform = `rotate(${degrees}deg)`;
   
-  setTimeout(() => {
+  setTimeout(async () => {
     const wonPoints = prizes[randomSpin];
     points += wonPoints;
     
@@ -436,232 +334,33 @@ function spin() {
     spinning = false;
     document.getElementById('spinBtn').disabled = false;
     updateUI();
+    
+    await saveUserData();
   }, 4000);
   
   updateUI();
+  await saveUserData();
 }
 
-function closeModal() {
+// Close win modal
+function closeWinModal() {
   document.getElementById('winModal').classList.remove('active');
 }
 
+// Show rewards
 function showRewards() {
-  document.getElementById('rewardsSection').style.display = 'block';
-  document.getElementById('wheelSection').style.display = 'none';
-  document.getElementById('tasksSection').style.display = 'none';
-  window.scrollTo(0, 0);
-}
-
-function hideRewards() {
-  document.getElementById('rewardsSection').style.display = 'none';
-  document.getElementById('wheelSection').style.display = 'block';
-  document.getElementById('tasksSection').style.display = 'block';
-}
-
-function showRegister() {
-  if (isRegistered) {
-    alert('✅ You are already registered!\n\nYour referral code: ' + referralCode + '\n\nShare it to earn 1000 points per friend!');
+  if (!currentUser) {
+    alert('⚠️ Please login first!');
+    showLogin();
     return;
   }
-  document.getElementById('registerModal').classList.add('active');
+  alert('🎁 Rewards Shop\n\nComing soon!\nYou have ' + points + ' points.');
 }
 
-function closeRegister() {
-  document.getElementById('registerModal').classList.remove('active');
+// Generate referral code
+function generateReferralCode() {
+  return 'SPIN' + Math.random().toString(36).substr(2, 6).toUpperCase();
 }
-
-function submitRegistration(event) {
-  event.preventDefault();
-  
-  const name = document.getElementById('regName').value;
-  const email = document.getElementById('regEmail').value;
-  const mobile = document.getElementById('regMobile').value;
-  const payment = document.getElementById('regPayment').value;
-  const upi = document.getElementById('regUPI').value;
-  const referral = document.getElementById('regReferral').value;
-  
-  localStorage.setItem('userRegistered', 'true');
-  localStorage.setItem('userName', name);
-  localStorage.setItem('userEmail', email);
-  localStorage.setItem('userMobile', mobile);
-  localStorage.setItem('userPayment', payment);
-  localStorage.setItem('userUPI', upi);
-  
-  referralCode = generateReferralCode();
-  localStorage.setItem('referralCode', referralCode);
-  
-  points += 1000;
-  isRegistered = true;
-  
-  closeRegister();
-  
-  alert(`✅ Registration Successful!\n\nWelcome ${name}!\n\n🎁 1000 Bonus Points Added!\n\nYour Referral Code: ${referralCode}\n\nShare it to earn 1000 points per friend!`);
-  
-  document.getElementById('registerAlert').style.display = 'none';
-  document.getElementById('registerBtn').textContent = '✓ Registered';
-  document.getElementById('registerBtn').style.background = '#51cf66';
-  
-  updateUI();
-}
-
-function redeemReward(type, pointsCost, cashValue) {
-  if (!isRegistered) {
-    alert('⚠️ Registration Required!\n\nPlease register your account first to redeem rewards.\n\nClick the "Register" button to get started!');
-    showRegister();
-    return;
-  }
-  
-  if (points < pointsCost) {
-    alert(`❌ Not enough points!\n\nYou need ${pointsCost} points.\nYou have ${points} points.\n\nEarn more by:\n• Spinning the wheel\n• Inviting friends (+1000 points each)\n• Completing daily tasks`);
-    return;
-  }
-  
-  currentRedemption = { type, pointsCost, cashValue };
-  
-  document.getElementById('rewardType').textContent = type;
-  document.getElementById('rewardValue').textContent = cashValue;
-  document.getElementById('rewardPoints').textContent = pointsCost;
-  document.getElementById('redeemForm').style.display = 'block';
-  document.getElementById('redeemTitle').textContent = '🎁 Confirm Redemption';
-  document.getElementById('redeemMessage').textContent = '';
-  document.getElementById('redeemNote').textContent = 'Payment will be processed within 24-48 hours';
-  
-  document.getElementById('redeemModal').classList.add('active');
-}
-
-function confirmRedemption() {
-  if (!currentRedemption) return;
-  
-  const { type, pointsCost, cashValue } = currentRedemption;
-  
-  points -= pointsCost;
-  earnings += cashValue;
-  
-  const redemptions = JSON.parse(localStorage.getItem('redemptions') || '[]');
-  redemptions.push({
-    type,
-    value: cashValue,
-    points: pointsCost,
-    date: new Date().toISOString(),
-    status: 'Pending'
-  });
-  localStorage.setItem('redemptions', JSON.stringify(redemptions));
-  
-  document.getElementById('redeemForm').style.display = 'none';
-  document.getElementById('redeemTitle').textContent = '✅ Redemption Successful!';
-  document.getElementById('redeemMessage').textContent = `${type} - ₹${cashValue} redeemed!`;
-  document.getElementById('redeemNote').textContent = 'Your payment request has been submitted. You will receive payment within 24-48 hours on your registered payment method.';
-  
-  updateUI();
-  currentRedemption = null;
-}
-
-function closeRedeemModal() {
-  document.getElementById('redeemModal').classList.remove('active');
-  currentRedemption = null;
-}
-
-function inviteFriend() {
-  if (!isRegistered) {
-    alert('⚠️ Register first to get your referral code!');
-    showRegister();
-    return;
-  }
-  
-  document.getElementById('refCode').textContent = referralCode;
-  document.getElementById('shareModal').classList.add('active');
-}
-
-function closeShareModal() {
-  document.getElementById('shareModal').classList.remove('active');
-}
-
-function shareWhatsApp() {
-  const text = `🎰 Join Spin & Earn - Win Real Money!\n\n✅ FREE to play\n✅ Earn Paytm cash, Amazon vouchers\n✅ Get 1000 bonus points on signup!\n✅ Daily rewards & bonuses\n\nUse my code: ${referralCode}\n\nPlay now: https://johnsondelark-png.github.io/spin-and-earn-game/`;
-  
-  window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-  
-  setTimeout(() => {
-    points += 500;
-    updateUI();
-    alert('✅ +500 Points for sharing!');
-  }, 2000);
-}
-
-function shareFacebook() {
-  const url = `https://johnsondelark-png.github.io/spin-and-earn-game/?ref=${referralCode}`;
-  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
-  
-  setTimeout(() => {
-    points += 500;
-    updateUI();
-    alert('✅ +500 Points for sharing!');
-  }, 2000);
-}
-
-function shareTwitter() {
-  const text = `🎰 Earning real money playing Spin & Earn! Join me and get 1000 bonus points! Use code: ${referralCode}`;
-  const url = `https://johnsondelark-png.github.io/spin-and-earn-game/?ref=${referralCode}`;
-  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
-  
-  setTimeout(() => {
-    points += 500;
-    updateUI();
-    alert('✅ +500 Points for sharing!');
-  }, 2000);
-}
-
-function copyLink() {
-  const url = `https://johnsondelark-png.github.io/spin-and-earn-game/?ref=${referralCode}`;
-  const text = `🎰 Join Spin & Earn!\n\nUse my code: ${referralCode}\n\n${url}`;
-  
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(text).then(() => {
-      alert('✅ Link copied!\n\nShare it with friends to earn 1000 points per referral!');
-      points += 100;
-      updateUI();
-    });
-  } else {
-    prompt('Copy this link:', text);
-    points += 100;
-    updateUI();
-  }
-}
-
-function shareOnSocial() {
-  inviteFriend();
-}
-
-function watchAd() {
-  alert('🎬 Ad Playing...\n\nThank you for watching!\nThis helps us keep the game FREE!');
-  points += 100;
-  updateUI();
-  alert('✅ +100 Points earned!');
-}
-
-function dailyCheckin() {
-  points += 300;
-  spinsLeft += 3;
-  document.getElementById('checkinBtn').disabled = true;
-  document.getElementById('checkinBtn').textContent = 'Claimed!';
-  document.getElementById('checkinBtn').style.background = '#ccc';
-  updateUI();
-  alert('✅ Daily Check-in Bonus!\n\n+300 Points\n+3 Free Spins\n\nCome back tomorrow for more!');
-}
-
-// Check for referral code in URL
-window.addEventListener('load', () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const refCode = urlParams.get('ref');
-  if (refCode && !isRegistered) {
-    document.getElementById('regReferral').value = refCode;
-    alert('🎁 Referral code applied!\n\nRegister now to get 1000 bonus points!');
-    showRegister();
-  }
-});
-
-checkRegistration();
-updateUI();
 </script>
 
 </body>
