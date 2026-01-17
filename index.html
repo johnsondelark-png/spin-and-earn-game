@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="monetag" content="4109dc8f2ad8fcc86ad8833f8f6b1549">
-<title>Spin & Earn - Win Real Money Online | Instant ₹1 Payout!</title>
-<meta name="description" content="Play Spin & Earn game and win real money! Instant ₹1 minimum payout. Earn Paytm cash, Amazon vouchers, mobile recharge. 100% FREE to play!">
+<title>Spin & Earn - Win Real Money Online | Instant ₹1 UPI Payout!</title>
+<meta name="description" content="Play Spin & Earn game and win real money! Instant ₹1 minimum UPI payout. Earn via Paytm, Google Pay, PhonePe, Amazon vouchers. 100% FREE to play!">
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,8 +44,10 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 .reward-item { padding: 15px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 10px; margin-bottom: 10px; border: 2px solid #dee2e6; transition: 0.3s; }
 .reward-item:hover { border-color: #51cf66; transform: scale(1.02); }
 .reward-item strong { color: #333; font-size: 16px; }
-.reward-item small { color: #51cf66; font-weight: bold; }
+.reward-item small { color: #51cf66; font-weight: bold; display: block; margin: 5px 0; }
 .instant-badge { background: #ff6b6b; color: white; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: bold; margin-left: 10px; }
+.upi-icons { margin: 10px 0; }
+.upi-icons span { display: inline-block; background: #f8f9fa; padding: 5px 10px; border-radius: 5px; margin: 2px; font-size: 12px; }
 
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
 .modal.active { display: flex; }
@@ -58,6 +60,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   .container { padding: 10px; }
   .ad-container { max-width: 100%; }
   .header h1 { font-size: 20px; }
+  .task-btn { padding: 6px 15px; font-size: 12px; }
 }
 </style>
 </head>
@@ -79,8 +82,8 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 
 <div class="container">
   <div class="alert-box">
-    <h3>🎉 Instant ₹1 Minimum Payout!</h3>
-    <p>Start earning NOW! Redeem from just ₹1. No waiting, no hassle! 💰</p>
+    <h3>🎉 Instant ₹1 UPI Payout!</h3>
+    <p>Direct to Google Pay, PhonePe, Paytm! No waiting! 💰</p>
   </div>
 
   <div class="wheel-container">
@@ -138,35 +141,58 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
     <div class="rewards-subtitle">100 Points = ₹1 💰</div>
     
     <div class="reward-item">
-      <strong>💳 Paytm Cash</strong>
+      <strong>📱 UPI Payment</strong>
       <span class="instant-badge">INSTANT</span><br>
+      <small>Direct to Google Pay, PhonePe, Paytm, BHIM</small>
+      <div class="upi-icons">
+        <span>💚 Google Pay</span>
+        <span>💜 PhonePe</span>
+        <span>💙 Paytm</span>
+        <span>🧡 BHIM</span>
+      </div>
       <small>Minimum: 100 Points = ₹1</small><br>
-      <button class="task-btn" onclick="redeemReward('Paytm', 100, 1)" style="margin-top: 10px;">Redeem ₹1</button>
-      <button class="task-btn" onclick="redeemReward('Paytm', 500, 5)" style="margin-top: 10px; margin-left: 5px;">Redeem ₹5</button>
-      <button class="task-btn" onclick="redeemReward('Paytm', 1000, 10)" style="margin-top: 10px; margin-left: 5px;">Redeem ₹10</button>
+      <button class="task-btn" onclick="redeemReward('UPI', 100, 1)" style="margin-top: 10px;">₹1</button>
+      <button class="task-btn" onclick="redeemReward('UPI', 500, 5)" style="margin-top: 10px; margin-left: 5px;">₹5</button>
+      <button class="task-btn" onclick="redeemReward('UPI', 1000, 10)" style="margin-top: 10px; margin-left: 5px;">₹10</button>
+      <button class="task-btn" onclick="redeemReward('UPI', 5000, 50)" style="margin-top: 10px; margin-left: 5px;">₹50</button>
+    </div>
+    
+    <div class="reward-item">
+      <strong>💳 Paytm Wallet</strong>
+      <span class="instant-badge">INSTANT</span><br>
+      <small>Direct to Paytm wallet</small><br>
+      <small>Minimum: 100 Points = ₹1</small><br>
+      <button class="task-btn" onclick="redeemReward('Paytm', 100, 1)" style="margin-top: 10px;">₹1</button>
+      <button class="task-btn" onclick="redeemReward('Paytm', 500, 5)" style="margin-top: 10px; margin-left: 5px;">₹5</button>
+      <button class="task-btn" onclick="redeemReward('Paytm', 1000, 10)" style="margin-top: 10px; margin-left: 5px;">₹10</button>
+      <button class="task-btn" onclick="redeemReward('Paytm', 5000, 50)" style="margin-top: 10px; margin-left: 5px;">₹50</button>
     </div>
     
     <div class="reward-item">
       <strong>🛒 Amazon Voucher</strong>
       <span class="instant-badge">INSTANT</span><br>
+      <small>Amazon gift card code via email</small><br>
       <small>Minimum: 100 Points = ₹1</small><br>
-      <button class="task-btn" onclick="redeemReward('Amazon', 100, 1)" style="margin-top: 10px;">Redeem ₹1</button>
-      <button class="task-btn" onclick="redeemReward('Amazon', 500, 5)" style="margin-top: 10px; margin-left: 5px;">Redeem ₹5</button>
-      <button class="task-btn" onclick="redeemReward('Amazon', 1000, 10)" style="margin-top: 10px; margin-left: 5px;">Redeem ₹10</button>
+      <button class="task-btn" onclick="redeemReward('Amazon', 100, 1)" style="margin-top: 10px;">₹1</button>
+      <button class="task-btn" onclick="redeemReward('Amazon', 500, 5)" style="margin-top: 10px; margin-left: 5px;">₹5</button>
+      <button class="task-btn" onclick="redeemReward('Amazon', 1000, 10)" style="margin-top: 10px; margin-left: 5px;">₹10</button>
+      <button class="task-btn" onclick="redeemReward('Amazon', 5000, 50)" style="margin-top: 10px; margin-left: 5px;">₹50</button>
     </div>
     
     <div class="reward-item">
       <strong>📱 Mobile Recharge</strong>
       <span class="instant-badge">INSTANT</span><br>
+      <small>Any operator - Jio, Airtel, Vi, BSNL</small><br>
       <small>Minimum: 100 Points = ₹1</small><br>
-      <button class="task-btn" onclick="redeemReward('Recharge', 100, 1)" style="margin-top: 10px;">Redeem ₹1</button>
-      <button class="task-btn" onclick="redeemReward('Recharge', 500, 5)" style="margin-top: 10px; margin-left: 5px;">Redeem ₹5</button>
-      <button class="task-btn" onclick="redeemReward('Recharge', 1000, 10)" style="margin-top: 10px; margin-left: 5px;">Redeem ₹10</button>
+      <button class="task-btn" onclick="redeemReward('Recharge', 100, 1)" style="margin-top: 10px;">₹1</button>
+      <button class="task-btn" onclick="redeemReward('Recharge', 500, 5)" style="margin-top: 10px; margin-left: 5px;">₹5</button>
+      <button class="task-btn" onclick="redeemReward('Recharge', 1000, 10)" style="margin-top: 10px; margin-left: 5px;">₹10</button>
+      <button class="task-btn" onclick="redeemReward('Recharge', 5000, 50)" style="margin-top: 10px; margin-left: 5px;">₹50</button>
     </div>
 
     <div style="background: #e7f5ff; padding: 15px; border-radius: 10px; margin-top: 15px;">
       <p style="color: #1971c2; font-size: 14px; margin: 0;">
-        <strong>💡 Pro Tip:</strong> Start with ₹1 redemption to test! Payments processed within 24 hours. 🚀
+        <strong>💡 Pro Tip:</strong> UPI is fastest! Money directly in your account within 24 hours. Start with ₹1 to test! 🚀
       </p>
     </div>
   </div>
@@ -191,12 +217,19 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   <div class="modal-content">
     <h2>✅ Redemption Successful!</h2>
     <p id="redeemMessage" style="font-size: 20px; margin: 20px 0; color: #51cf66;"></p>
-    <p style="color: #666; font-size: 14px; line-height: 1.6;">
-      🎉 Your payment request has been submitted!<br><br>
-      ⏱️ Processing time: 24 hours<br>
-      💳 Payment method: <span id="paymentMethod"></span><br>
-      📱 Check your registered account<br><br>
-      <strong>Note:</strong> Make sure you're registered with valid payment details!
+    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 15px 0; text-align: left;">
+      <p style="color: #333; font-size: 14px; line-height: 1.8; margin: 0;">
+        <strong>📱 Payment Method:</strong> <span id="paymentMethod"></span><br>
+        <strong>💰 Amount:</strong> ₹<span id="paymentAmount"></span><br>
+        <strong>⏱️ Processing Time:</strong> 24 hours<br>
+        <strong>📧 Notification:</strong> Via email/SMS
+      </p>
+    </div>
+    <p style="color: #666; font-size: 13px; line-height: 1.6;">
+      🎉 Your payment request has been submitted!<br>
+      💳 Money will be sent to your registered UPI ID/account<br>
+      📱 Make sure you're registered with valid payment details<br><br>
+      <strong>Note:</strong> First-time redemption may take up to 48 hours for verification.
     </p>
     <button class="modal-close" onclick="closeRedeemModal()">Got it!</button>
   </div>
@@ -257,11 +290,11 @@ function closeModal() {
 }
 
 function shareGame() {
-  const shareText = `🎰 Spin & Earn - Instant ₹1 Payout!\n\n✅ Minimum redeem: Just ₹1\n✅ Instant payment in 24hrs\n✅ FREE to play\n✅ Daily bonuses\n\nJoin now: https://johnsondelark-png.github.io/spin-and-earn-game/`;
+  const shareText = `🎰 Spin & Earn - Instant ₹1 UPI Payout!\n\n✅ Direct to Google Pay/PhonePe\n✅ Minimum redeem: Just ₹1\n✅ Instant payment in 24hrs\n✅ FREE to play\n\nJoin now: https://johnsondelark-png.github.io/spin-and-earn-game/`;
   
   if (navigator.share) {
     navigator.share({ 
-      title: 'Spin & Earn - Instant ₹1 Payout',
+      title: 'Spin & Earn - Instant ₹1 UPI Payout',
       text: shareText 
     }).then(() => {
       points += 500;
@@ -290,7 +323,7 @@ function dailyCheckin() {
 
 function inviteFriends() {
   const referralLink = 'https://johnsondelark-png.github.io/spin-and-earn-game/?ref=' + Math.random().toString(36).substr(2, 6);
-  const message = `🎰 Join me on Spin & Earn!\n\n✅ Instant ₹1 minimum payout\n✅ Win real money\n✅ Daily rewards\n✅ FREE to play\n\nUse my link: ${referralLink}`;
+  const message = `🎰 Join me on Spin & Earn!\n\n✅ Instant ₹1 UPI payout\n✅ Google Pay/PhonePe/Paytm\n✅ Win real money\n✅ FREE to play\n\nUse my link: ${referralLink}`;
   
   if (navigator.share) {
     navigator.share({ text: message });
@@ -315,6 +348,7 @@ function redeemReward(type, pointsCost, cashValue) {
   
   document.getElementById('redeemMessage').textContent = `₹${cashValue} ${type} redeemed!`;
   document.getElementById('paymentMethod').textContent = type;
+  document.getElementById('paymentAmount').textContent = cashValue;
   document.getElementById('redeemModal').classList.add('active');
   
   // Save redemption
