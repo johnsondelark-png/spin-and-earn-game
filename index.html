@@ -11,9 +11,12 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
 
-.header { background: rgba(255,255,255,0.95); padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+.header { background: rgba(255,255,255,0.95); padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
 .header h1 { color: #667eea; font-size: 24px; }
 .points { background: #ffd43b; color: #333; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
+
+.ad-container { max-width: 728px; margin: 20px auto; text-align: center; background: white; padding: 10px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+.ad-label { font-size: 10px; color: #999; margin-bottom: 5px; }
 
 .container { max-width: 600px; margin: 20px auto; padding: 20px; }
 
@@ -33,6 +36,10 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 .task-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; border-radius: 10px; margin-bottom: 10px; }
 .task-btn { background: #51cf66; color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; }
 
+.rewards-box { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
+.rewards-box h2 { margin-bottom: 15px; color: #333; }
+.reward-item { padding: 15px; background: #f8f9fa; border-radius: 10px; margin-bottom: 10px; }
+
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
 .modal.active { display: flex; }
 .modal-content { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 500px; width: 90%; }
@@ -42,6 +49,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 @media (max-width: 600px) {
   .wheel { width: 250px; height: 250px; }
   .container { padding: 10px; }
+  .ad-container { max-width: 100%; }
 }
 </style>
 </head>
@@ -52,10 +60,16 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   <span class="points">⭐ <span id="points">1000</span> Points</span>
 </div>
 
+<!-- Top Banner Ad -->
+<div class="ad-container">
+  <div class="ad-label">Advertisement</div>
+  <iframe data-aa='2329046' src='//ad.a-ads.com/2329046?size=728x90' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+</div>
+
 <div class="container">
   <div class="alert-box">
     <h3>💰 Earn Real Money!</h3>
-    <p>Play games, complete tasks, and redeem rewards. Support us by viewing ads - it helps keep the game FREE for everyone!</p>
+    <p>Play games, complete tasks, and redeem rewards. Ads help us keep the game FREE for everyone! 🙏</p>
   </div>
 
   <div class="wheel-container">
@@ -77,15 +91,14 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
     <div style="margin-top: 15px; color: #666;">Free Spins: <strong><span id="spinsLeft">5</span></strong></div>
   </div>
 
+  <!-- Middle Square Ad -->
+  <div class="ad-container" style="max-width: 300px;">
+    <div class="ad-label">Advertisement</div>
+    <iframe data-aa='2329046' src='//ad.a-ads.com/2329046?size=300x250' style='width:300px; height:250px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+  </div>
+
   <div class="tasks">
     <h2>🎯 Earn More Points</h2>
-    <div class="task-item">
-      <div>
-        <strong>Watch Rewarded Ad</strong><br>
-        <small>+100 Points (Supports us!)</small>
-      </div>
-      <button class="task-btn" onclick="watchAd()">Watch</button>
-    </div>
     <div class="task-item">
       <div>
         <strong>Share with Friends</strong><br>
@@ -100,7 +113,39 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
       </div>
       <button class="task-btn" id="checkinBtn" onclick="dailyCheckin()">Claim</button>
     </div>
+    <div class="task-item">
+      <div>
+        <strong>Invite 5 Friends</strong><br>
+        <small>+2000 Points Bonus!</small>
+      </div>
+      <button class="task-btn" onclick="inviteFriends()">Invite</button>
+    </div>
   </div>
+
+  <div class="rewards-box">
+    <h2>🎁 Redeem Rewards</h2>
+    <div class="reward-item">
+      <strong>💳 Paytm Cash</strong><br>
+      <small>10,000 Points = ₹100</small><br>
+      <button class="task-btn" onclick="redeemReward('Paytm', 10000, 100)" style="margin-top: 10px;">Redeem</button>
+    </div>
+    <div class="reward-item">
+      <strong>🛒 Amazon Voucher</strong><br>
+      <small>15,000 Points = ₹150</small><br>
+      <button class="task-btn" onclick="redeemReward('Amazon', 15000, 150)" style="margin-top: 10px;">Redeem</button>
+    </div>
+    <div class="reward-item">
+      <strong>📱 Mobile Recharge</strong><br>
+      <small>5,000 Points = ₹50</small><br>
+      <button class="task-btn" onclick="redeemReward('Recharge', 5000, 50)" style="margin-top: 10px;">Redeem</button>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Banner Ad -->
+<div class="ad-container">
+  <div class="ad-label">Advertisement</div>
+  <iframe data-aa='2329046' src='//ad.a-ads.com/2329046?size=728x90' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
 </div>
 
 <div class="modal" id="winModal">
@@ -111,11 +156,19 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   </div>
 </div>
 
+<div class="modal" id="redeemModal">
+  <div class="modal-content">
+    <h2>✅ Redemption Request</h2>
+    <p id="redeemMessage" style="font-size: 18px; margin: 20px 0;"></p>
+    <p style="color: #666; font-size: 14px;">Payment will be processed within 24-48 hours. Make sure you're registered!</p>
+    <button class="modal-close" onclick="closeRedeemModal()">Got it!</button>
+  </div>
+</div>
+
 <script>
 let points = parseInt(localStorage.getItem('points') || '1000');
 let spinsLeft = parseInt(localStorage.getItem('spinsLeft') || '5');
 let spinning = false;
-let adShownCount = parseInt(localStorage.getItem('adShownCount') || '0');
 const prizes = [1000, 50, 200, 500, 100, 20, 150, 300];
 
 function updateUI() {
@@ -123,17 +176,6 @@ function updateUI() {
   document.getElementById('spinsLeft').textContent = spinsLeft;
   localStorage.setItem('points', points);
   localStorage.setItem('spinsLeft', spinsLeft);
-}
-
-function showMonetizationAd() {
-  // Show ad every 3rd spin to balance user experience and monetization
-  adShownCount++;
-  localStorage.setItem('adShownCount', adShownCount);
-  
-  if (adShownCount % 3 === 0) {
-    // Open Monetag SmartLink in new window
-    window.open('https://otieu.com/4/10456383', '_blank');
-  }
 }
 
 function spin() {
@@ -152,9 +194,6 @@ function spin() {
   
   wheel.style.transform = `rotate(${degrees}deg)`;
   
-  // Show monetization ad
-  showMonetizationAd();
-  
   setTimeout(() => {
     const wonPoints = prizes[randomSpin];
     points += wonPoints;
@@ -172,17 +211,6 @@ function spin() {
 
 function closeModal() {
   document.getElementById('winModal').classList.remove('active');
-}
-
-function watchAd() {
-  // Open ad in new window
-  window.open('https://otieu.com/4/10456383', '_blank');
-  
-  setTimeout(() => {
-    points += 100;
-    updateUI();
-    alert('✅ +100 Points earned!\n\nThank you for supporting us! 🙏');
-  }, 1000);
 }
 
 function shareGame() {
@@ -212,6 +240,48 @@ function dailyCheckin() {
   document.getElementById('checkinBtn').style.background = '#ccc';
   updateUI();
   alert('✅ Daily Check-in Bonus!\n\n+300 Points\n+3 Free Spins');
+}
+
+function inviteFriends() {
+  const referralLink = 'https://johnsondelark-png.github.io/spin-and-earn-game/?ref=' + Math.random().toString(36).substr(2, 6);
+  const message = `🎰 Join me on Spin & Earn!\n\n✅ Win real money\n✅ Daily rewards\n✅ FREE to play\n\nUse my link: ${referralLink}`;
+  
+  if (navigator.share) {
+    navigator.share({ text: message });
+  } else {
+    alert(message);
+  }
+  
+  points += 100;
+  updateUI();
+  alert('✅ +100 Points! Earn 400 more when 5 friends join!');
+}
+
+function redeemReward(type, pointsCost, cashValue) {
+  if (points < pointsCost) {
+    alert(`❌ Not enough points!\n\nYou need: ${pointsCost} points\nYou have: ${points} points\n\nKeep playing to earn more!`);
+    return;
+  }
+  
+  points -= pointsCost;
+  updateUI();
+  
+  document.getElementById('redeemMessage').textContent = `${type} - ₹${cashValue} redeemed successfully!`;
+  document.getElementById('redeemModal').classList.add('active');
+  
+  // Save redemption
+  const redemptions = JSON.parse(localStorage.getItem('redemptions') || '[]');
+  redemptions.push({
+    type: type,
+    amount: cashValue,
+    points: pointsCost,
+    date: new Date().toISOString()
+  });
+  localStorage.setItem('redemptions', JSON.stringify(redemptions));
+}
+
+function closeRedeemModal() {
+  document.getElementById('redeemModal').classList.remove('active');
 }
 
 updateUI();
