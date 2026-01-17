@@ -16,19 +16,21 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 .header-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .points { background: #ffd43b; color: #333; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
 .balance { background: #51cf66; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
+.profile-btn { background: #667eea; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; }
 
 .ad-container { max-width: 728px; margin: 20px auto; text-align: center; background: white; padding: 10px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
 .ad-label { font-size: 10px; color: #999; margin-bottom: 5px; }
 
 .container { max-width: 600px; margin: 20px auto; padding: 20px; }
 
-.viral-box { background: linear-gradient(135deg, #ff6b6b, #ff8787); color: white; padding: 25px; border-radius: 15px; margin-bottom: 20px; text-align: center; box-shadow: 0 5px 20px rgba(255,107,107,0.4); }
-.viral-box h3 { font-size: 26px; margin-bottom: 15px; }
-.viral-box p { font-size: 18px; margin-bottom: 15px; }
-.viral-btn { background: white; color: #ff6b6b; border: none; padding: 15px 40px; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+.register-alert { background: linear-gradient(135deg, #ff6b6b, #ff8787); color: white; padding: 25px; border-radius: 15px; margin-bottom: 20px; text-align: center; box-shadow: 0 5px 20px rgba(255,107,107,0.4); animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+.register-alert h3 { font-size: 26px; margin-bottom: 15px; }
+.register-btn { background: white; color: #ff6b6b; border: none; padding: 15px 40px; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
-.alert-box { background: linear-gradient(135deg, #51cf66, #37b24d); color: white; padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: center; box-shadow: 0 5px 15px rgba(81,207,102,0.3); }
-.alert-box h3 { font-size: 24px; margin-bottom: 10px; }
+.viral-box { background: linear-gradient(135deg, #51cf66, #37b24d); color: white; padding: 25px; border-radius: 15px; margin-bottom: 20px; text-align: center; box-shadow: 0 5px 20px rgba(81,207,102,0.4); }
+.viral-box h3 { font-size: 26px; margin-bottom: 15px; }
+.viral-btn { background: white; color: #51cf66; border: none; padding: 15px 40px; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
 .wheel-container { background: white; border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 20px; }
 .wheel { width: 300px; height: 300px; margin: 20px auto; position: relative; border-radius: 50%; border: 10px solid #ffd43b; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); }
@@ -38,35 +40,34 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 .spin-btn:disabled { background: #ccc; cursor: not-allowed; }
 
 .gaming-offers { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
-.gaming-offers h2 { margin-bottom: 15px; color: #333; text-align: center; }
 .offer-card { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(102,126,234,0.3); }
-.offer-card h3 { font-size: 20px; margin-bottom: 10px; }
-.offer-card p { font-size: 14px; margin-bottom: 15px; line-height: 1.6; }
 .offer-btn { background: #ffd43b; color: #333; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; font-size: 16px; }
 
 .tasks { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
-.tasks h2 { margin-bottom: 15px; color: #333; }
 .task-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; border-radius: 10px; margin-bottom: 10px; }
 .task-btn { background: #51cf66; color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; }
 
 .rewards-box { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
-.rewards-box h2 { margin-bottom: 10px; color: #333; text-align: center; }
-.rewards-subtitle { text-align: center; color: #51cf66; font-size: 18px; font-weight: bold; margin-bottom: 20px; }
 .reward-item { padding: 15px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 10px; margin-bottom: 10px; border: 2px solid #dee2e6; }
 .instant-badge { background: #ff6b6b; color: white; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: bold; margin-left: 10px; }
 
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
 .modal.active { display: flex; }
 .modal-content { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
 .modal h2 { color: #51cf66; font-size: 32px; margin-bottom: 20px; }
 .modal-close { background: #667eea; color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; margin-top: 20px; }
+
+.form-group { margin-bottom: 20px; text-align: left; }
+.form-group label { display: block; margin-bottom: 8px; color: #333; font-weight: bold; font-size: 14px; }
+.form-group input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; }
+.form-group input:focus { outline: none; border-color: #667eea; }
+.form-group small { color: #666; font-size: 12px; display: block; margin-top: 5px; }
 
 @media (max-width: 600px) {
   .wheel { width: 250px; height: 250px; }
   .container { padding: 10px; }
   .ad-container { max-width: 100%; }
   .header h1 { font-size: 20px; }
-  .task-btn, .offer-btn { padding: 8px 15px; font-size: 14px; }
 }
 </style>
 </head>
@@ -75,6 +76,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 <div class="header">
   <h1>🎰 Spin & Earn</h1>
   <div class="header-right">
+    <button class="profile-btn" onclick="showProfile()" id="profileBtn">Register</button>
     <span class="points">⭐ <span id="points">1000</span></span>
     <span class="balance">₹<span id="earnings">10</span></span>
   </div>
@@ -87,55 +89,19 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 </div>
 
 <div class="container">
+  <!-- Registration Alert (Shows if not registered) -->
+  <div class="register-alert" id="registerAlert">
+    <h3>⚠️ Register to Withdraw Money!</h3>
+    <p style="font-size: 16px; margin-bottom: 15px;">Add your UPI ID to receive instant payments!</p>
+    <button class="register-btn" onclick="showRegister()">📱 Register UPI ID Now</button>
+  </div>
+
   <!-- Viral Referral Box -->
   <div class="viral-box">
     <h3>🎁 Invite Friends = Earn ₹50 Each!</h3>
-    <p>Share your link & earn ₹50 for every friend who joins!</p>
+    <p style="font-size: 16px; margin-bottom: 15px;">Share your link & earn ₹50 for every friend!</p>
     <button class="viral-btn" onclick="shareReferral()">📱 Share & Earn ₹50</button>
-    <p style="font-size: 14px; margin-top: 15px;">Your Referrals: <strong><span id="referralCount">0</span></strong> | Earned: <strong>₹<span id="referralEarnings">0</span></strong></p>
-  </div>
-
-  <div class="alert-box">
-    <h3>🎉 Instant ₹1 UPI Payout!</h3>
-    <p>Direct to Google Pay, PhonePe, Paytm! Start with ₹10 FREE! 💰</p>
-  </div>
-
-  <!-- Gaming Offers Section -->
-  <div class="gaming-offers">
-    <h2>🎮 Play More Games & Earn Big!</h2>
-    
-    <div class="offer-card">
-      <h3>🏏 MPL - Mobile Premier League</h3>
-      <p>
-        ✅ Play cricket, football, chess & more<br>
-        ✅ Win real cash daily<br>
-        ✅ Get ₹50 signup bonus<br>
-        ✅ Instant withdrawal to UPI
-      </p>
-      <button class="offer-btn" onclick="openMPL()">Play MPL & Earn ₹50</button>
-    </div>
-
-    <div class="offer-card">
-      <h3>🎯 WinZO - India's Gaming App</h3>
-      <p>
-        ✅ 100+ games to play<br>
-        ✅ Win up to ₹10 Lakhs<br>
-        ✅ ₹25 signup bonus<br>
-        ✅ Play in Hindi & English
-      </p>
-      <button class="offer-btn" onclick="openWinZO()">Play WinZO & Earn ₹25</button>
-    </div>
-
-    <div class="offer-card">
-      <h3>🎲 Zupee - Ludo & Quiz Games</h3>
-      <p>
-        ✅ Play Ludo & win real money<br>
-        ✅ Quiz games with cash prizes<br>
-        ✅ ₹10 signup bonus<br>
-        ✅ Fast UPI withdrawals
-      </p>
-      <button class="offer-btn" onclick="openZupee()">Play Zupee & Earn ₹10</button>
-    </div>
+    <p style="font-size: 14px; margin-top: 15px;">Referrals: <strong><span id="referralCount">0</span></strong> | Earned: <strong>₹<span id="referralEarnings">0</span></strong></p>
   </div>
 
   <div class="wheel-container">
@@ -157,17 +123,29 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
     <div style="margin-top: 15px; color: #666;">Free Spins: <strong><span id="spinsLeft">5</span></strong></div>
   </div>
 
-  <!-- Middle Square Ad -->
-  <div class="ad-container" style="max-width: 300px;">
-    <div class="ad-label">Advertisement</div>
-    <iframe data-aa='2329046' src='//ad.a-ads.com/2329046?size=300x250' style='width:300px; height:250px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+  <!-- Gaming Offers -->
+  <div class="gaming-offers">
+    <h2 style="text-align: center; margin-bottom: 15px;">🎮 Play More Games & Earn!</h2>
+    
+    <div class="offer-card">
+      <h3>🏏 MPL - Get ₹50 Bonus</h3>
+      <p>Play cricket, football, chess & more. Win real cash daily!</p>
+      <button class="offer-btn" onclick="openMPL()">Play MPL & Earn</button>
+    </div>
+
+    <div class="offer-card">
+      <h3>🎯 WinZO - Get ₹25 Bonus</h3>
+      <p>100+ games. Win up to ₹10 Lakhs. Play in Hindi & English!</p>
+      <button class="offer-btn" onclick="openWinZO()">Play WinZO & Earn</button>
+    </div>
   </div>
 
+  <!-- Tasks -->
   <div class="tasks">
     <h2>🎯 Earn More Points</h2>
     <div class="task-item">
       <div>
-        <strong>Share with 5 Friends</strong><br>
+        <strong>Share with Friends</strong><br>
         <small>+2500 Points (₹25) + ₹50 per friend!</small>
       </div>
       <button class="task-btn" onclick="shareReferral()">Share</button>
@@ -179,30 +157,17 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
       </div>
       <button class="task-btn" id="checkinBtn" onclick="dailyCheckin()">Claim</button>
     </div>
-    <div class="task-item">
-      <div>
-        <strong>Play MPL Games</strong><br>
-        <small>+1000 Points (₹10) + ₹50 bonus</small>
-      </div>
-      <button class="task-btn" onclick="openMPL()">Play</button>
-    </div>
-    <div class="task-item">
-      <div>
-        <strong>Follow on Instagram</strong><br>
-        <small>+500 Points (₹5)</small>
-      </div>
-      <button class="task-btn" onclick="followSocial()">Follow</button>
-    </div>
   </div>
 
+  <!-- Rewards -->
   <div class="rewards-box">
-    <h2>🎁 Instant Redeem</h2>
-    <div class="rewards-subtitle">100 Points = ₹1 💰</div>
+    <h2 style="text-align: center;">🎁 Instant Redeem</h2>
+    <p style="text-align: center; color: #51cf66; font-size: 18px; font-weight: bold; margin: 10px 0 20px;">100 Points = ₹1 💰</p>
     
     <div class="reward-item">
       <strong>📱 UPI Payment</strong>
       <span class="instant-badge">INSTANT</span><br>
-      <small style="color: #51cf66; font-weight: bold;">Google Pay, PhonePe, Paytm, BHIM</small><br>
+      <small style="color: #51cf66; font-weight: bold; display: block; margin: 5px 0;">Google Pay, PhonePe, Paytm, BHIM</small>
       <button class="task-btn" onclick="redeemReward('UPI', 100, 1)" style="margin-top: 10px;">₹1</button>
       <button class="task-btn" onclick="redeemReward('UPI', 500, 5)" style="margin: 10px 5px 0;">₹5</button>
       <button class="task-btn" onclick="redeemReward('UPI', 1000, 10)" style="margin: 10px 5px 0;">₹10</button>
@@ -217,13 +182,68 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
   <iframe data-aa='2329046' src='//ad.a-ads.com/2329046?size=728x90' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
 </div>
 
-<!-- Modals -->
+<!-- Registration Modal -->
+<div class="modal" id="registerModal">
+  <div class="modal-content">
+    <h2>📱 Register for Payments</h2>
+    <p style="color: #666; margin-bottom: 20px;">Add your details to receive instant UPI payments!</p>
+    
+    <form onsubmit="submitRegistration(event)">
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" id="regName" required placeholder="Enter your full name">
+      </div>
+      
+      <div class="form-group">
+        <label>Mobile Number *</label>
+        <input type="tel" id="regMobile" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
+        <small>For payment verification & notifications</small>
+      </div>
+      
+      <div class="form-group">
+        <label>Email Address *</label>
+        <input type="email" id="regEmail" required placeholder="your@email.com">
+        <small>For payment confirmations</small>
+      </div>
+      
+      <div class="form-group">
+        <label>UPI ID * (Google Pay/PhonePe/Paytm)</label>
+        <input type="text" id="regUPI" required placeholder="yourname@paytm or 9876543210@ybl">
+        <small>Example: 9876543210@paytm or yourname@ybl</small>
+      </div>
+      
+      <button type="submit" class="spin-btn" style="width: 100%; margin-top: 10px;">✅ Register & Start Earning</button>
+    </form>
+    
+    <button class="modal-close" onclick="closeRegister()">Cancel</button>
+  </div>
+</div>
+
+<!-- Profile Modal -->
+<div class="modal" id="profileModal">
+  <div class="modal-content">
+    <h2>👤 Your Profile</h2>
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: left;">
+      <p style="margin: 10px 0;"><strong>Name:</strong> <span id="profileName">-</span></p>
+      <p style="margin: 10px 0;"><strong>Mobile:</strong> <span id="profileMobile">-</span></p>
+      <p style="margin: 10px 0;"><strong>Email:</strong> <span id="profileEmail">-</span></p>
+      <p style="margin: 10px 0;"><strong>UPI ID:</strong> <span id="profileUPI">-</span></p>
+      <p style="margin: 10px 0;"><strong>Points:</strong> <span id="profilePoints">0</span></p>
+      <p style="margin: 10px 0;"><strong>Earnings:</strong> ₹<span id="profileEarnings">0</span></p>
+      <p style="margin: 10px 0;"><strong>Referrals:</strong> <span id="profileReferrals">0</span></p>
+    </div>
+    <button class="spin-btn" onclick="editProfile()" style="width: 100%; margin-bottom: 10px;">✏️ Edit Profile</button>
+    <button class="modal-close" onclick="closeProfile()">Close</button>
+  </div>
+</div>
+
+<!-- Other Modals -->
 <div class="modal" id="winModal">
   <div class="modal-content">
     <h2>🎉 Congratulations!</h2>
     <p style="font-size: 24px; margin: 20px 0;">You Won <strong style="color: #ffd43b;"><span id="winPoints">0</span> Points!</strong></p>
     <p style="color: #51cf66; font-size: 18px;">That's ₹<span id="winCash">0</span>! 💰</p>
-    <button class="modal-close" onclick="closeModal()">Awesome!</button>
+    <button class="modal-close" onclick="closeModal('winModal')">Awesome!</button>
   </div>
 </div>
 
@@ -234,10 +254,10 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; word-break: break-all; margin: 15px 0;">
       <code id="referralLink" style="color: #667eea; font-size: 14px;"></code>
     </div>
-    <button class="viral-btn" onclick="copyReferralLink()" style="margin: 10px 0;">📋 Copy Link</button>
-    <button class="viral-btn" onclick="shareWhatsApp()" style="margin: 10px 0; background: #25D366;">💬 Share on WhatsApp</button>
-    <p style="color: #666; font-size: 14px; margin-top: 15px;">Earn ₹50 for each friend who joins using your link!</p>
-    <button class="modal-close" onclick="closeShareModal()">Close</button>
+    <button class="viral-btn" onclick="copyReferralLink()" style="margin: 10px 0; width: 100%;">📋 Copy Link</button>
+    <button class="viral-btn" onclick="shareWhatsApp()" style="margin: 10px 0; width: 100%; background: #25D366; color: white;">💬 Share on WhatsApp</button>
+    <p style="color: #666; font-size: 14px; margin-top: 15px;">Earn ₹50 for each friend who joins!</p>
+    <button class="modal-close" onclick="closeModal('shareModal')">Close</button>
   </div>
 </div>
 
@@ -249,12 +269,13 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
       <p style="color: #333; font-size: 14px; line-height: 1.8;">
         <strong>📱 Payment Method:</strong> <span id="paymentMethod"></span><br>
         <strong>💰 Amount:</strong> ₹<span id="paymentAmount"></span><br>
+        <strong>🏦 UPI ID:</strong> <span id="paymentUPI"></span><br>
         <strong>⏱️ Processing:</strong> 24-48 hours<br>
-        <strong>📧 Notification:</strong> Via email/SMS
+        <strong>📧 Notification:</strong> Via SMS/Email
       </p>
     </div>
-    <p style="color: #666; font-size: 13px;">Payment will be sent to your registered UPI ID. First-time may take 48 hours for verification.</p>
-    <button class="modal-close" onclick="closeRedeemModal()">Got it!</button>
+    <p style="color: #666; font-size: 13px;">Payment will be sent to your registered UPI ID. First-time may take 48 hours.</p>
+    <button class="modal-close" onclick="closeModal('redeemModal')">Got it!</button>
   </div>
 </div>
 
@@ -269,12 +290,22 @@ const prizes = [1000, 50, 200, 500, 100, 20, 150, 300];
 const userId = localStorage.getItem('userId') || Math.random().toString(36).substr(2, 9);
 localStorage.setItem('userId', userId);
 
+// Check registration
+const isRegistered = localStorage.getItem('isRegistered') === 'true';
+const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+
 function updateUI() {
   document.getElementById('points').textContent = points;
   document.getElementById('earnings').textContent = earnings;
   document.getElementById('spinsLeft').textContent = spinsLeft;
   document.getElementById('referralCount').textContent = referralCount;
   document.getElementById('referralEarnings').textContent = referralEarnings;
+  
+  if (isRegistered) {
+    document.getElementById('registerAlert').style.display = 'none';
+    document.getElementById('profileBtn').textContent = '👤 Profile';
+  }
+  
   localStorage.setItem('points', points);
   localStorage.setItem('earnings', earnings);
   localStorage.setItem('spinsLeft', spinsLeft);
@@ -282,9 +313,65 @@ function updateUI() {
   localStorage.setItem('referralEarnings', referralEarnings);
 }
 
+function showRegister() {
+  document.getElementById('registerModal').classList.add('active');
+}
+
+function closeRegister() {
+  document.getElementById('registerModal').classList.remove('active');
+}
+
+function submitRegistration(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('regName').value;
+  const mobile = document.getElementById('regMobile').value;
+  const email = document.getElementById('regEmail').value;
+  const upi = document.getElementById('regUPI').value;
+  
+  const userData = { name, mobile, email, upi, registeredAt: new Date().toISOString() };
+  localStorage.setItem('userData', JSON.stringify(userData));
+  localStorage.setItem('isRegistered', 'true');
+  
+  closeRegister();
+  alert(`✅ Registration Successful!\n\nWelcome ${name}!\n\nYour UPI ID: ${upi}\n\nYou can now withdraw money instantly! 💰`);
+  
+  location.reload();
+}
+
+function showProfile() {
+  if (!isRegistered) {
+    showRegister();
+    return;
+  }
+  
+  document.getElementById('profileName').textContent = userData.name || '-';
+  document.getElementById('profileMobile').textContent = userData.mobile || '-';
+  document.getElementById('profileEmail').textContent = userData.email || '-';
+  document.getElementById('profileUPI').textContent = userData.upi || '-';
+  document.getElementById('profilePoints').textContent = points;
+  document.getElementById('profileEarnings').textContent = earnings;
+  document.getElementById('profileReferrals').textContent = referralCount;
+  
+  document.getElementById('profileModal').classList.add('active');
+}
+
+function closeProfile() {
+  document.getElementById('profileModal').classList.remove('active');
+}
+
+function editProfile() {
+  closeProfile();
+  document.getElementById('regName').value = userData.name || '';
+  document.getElementById('regMobile').value = userData.mobile || '';
+  document.getElementById('regEmail').value = userData.email || '';
+  document.getElementById('regUPI').value = userData.upi || '';
+  showRegister();
+}
+
 function spin() {
   if (spinning || spinsLeft <= 0) {
-    alert('❌ No spins left!\n\nEarn more spins:\n• Daily check-in: +3 spins\n• Share with friends: Earn points!');
+    alert('❌ No spins left!\n\nEarn more:\n• Daily check-in: +3 spins\n• Share with friends!');
     return;
   }
   
@@ -316,8 +403,8 @@ function spin() {
   updateUI();
 }
 
-function closeModal() {
-  document.getElementById('winModal').classList.remove('active');
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
 }
 
 function shareReferral() {
@@ -326,20 +413,16 @@ function shareReferral() {
   document.getElementById('shareModal').classList.add('active');
 }
 
-function closeShareModal() {
-  document.getElementById('shareModal').classList.remove('active');
-}
-
 function copyReferralLink() {
   const link = document.getElementById('referralLink').textContent;
   navigator.clipboard.writeText(link).then(() => {
-    alert('✅ Link copied!\n\nShare it with friends to earn ₹50 each!');
+    alert('✅ Link copied!\n\nShare with friends to earn ₹50 each!');
   });
 }
 
 function shareWhatsApp() {
   const link = `https://johnsondelark-png.github.io/spin-and-earn-game/?ref=${userId}`;
-  const text = `🎰 Spin & Earn - Win Real Money!\n\n✅ Get ₹10 FREE on signup\n✅ Instant ₹1 UPI payout\n✅ Play games & earn daily\n✅ I earned ₹${earnings} already!\n\nJoin using my link:\n${link}\n\nYou get ₹10, I get ₹50! 🎁`;
+  const text = `🎰 Spin & Earn - Win Real Money!\n\n✅ ₹10 FREE on signup\n✅ Instant ₹1 UPI payout\n✅ I earned ₹${earnings}!\n\nJoin: ${link}\n\nYou get ₹10, I get ₹50! 🎁`;
   
   window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
 }
@@ -352,14 +435,14 @@ function dailyCheckin() {
   document.getElementById('checkinBtn').textContent = 'Claimed!';
   document.getElementById('checkinBtn').style.background = '#ccc';
   updateUI();
-  alert('✅ Daily Check-in Bonus!\n\n+300 Points (₹3)\n+3 Free Spins\n\nCome back tomorrow! 🎁');
+  alert('✅ Daily Bonus!\n\n+300 Points (₹3)\n+3 Spins\n\nCome back tomorrow! 🎁');
 }
 
 function openMPL() {
   points += 1000;
   earnings += 10;
   updateUI();
-  alert('🎮 Opening MPL...\n\n✅ +1000 Points (₹10) added!\n✅ Get ₹50 signup bonus on MPL!\n\nPlay & win real cash! 💰');
+  alert('🎮 Opening MPL...\n\n✅ +1000 Points (₹10)!\n✅ Get ₹50 bonus on MPL!\n\nWin real cash! 💰');
   window.open('https://www.mpl.live', '_blank');
 }
 
@@ -367,28 +450,19 @@ function openWinZO() {
   points += 500;
   earnings += 5;
   updateUI();
-  alert('🎮 Opening WinZO...\n\n✅ +500 Points (₹5) added!\n✅ Get ₹25 signup bonus!\n\nPlay 100+ games! 🎯');
+  alert('🎮 Opening WinZO...\n\n✅ +500 Points (₹5)!\n✅ Get ₹25 bonus!\n\nPlay 100+ games! 🎯');
   window.open('https://www.winzogames.com', '_blank');
 }
 
-function openZupee() {
-  points += 300;
-  earnings += 3;
-  updateUI();
-  alert('🎲 Opening Zupee...\n\n✅ +300 Points (₹3) added!\n✅ Get ₹10 signup bonus!\n\nPlay Ludo & Quiz! 🎲');
-  window.open('https://www.zupee.com', '_blank');
-}
-
-function followSocial() {
-  points += 500;
-  earnings += 5;
-  updateUI();
-  alert('✅ +500 Points (₹5) added!\n\nThank you for following! 🙏\n\nStay tuned for daily updates!');
-}
-
 function redeemReward(type, pointsCost, cashValue) {
+  if (!isRegistered) {
+    alert('⚠️ Registration Required!\n\nPlease register your UPI ID first to withdraw money!');
+    showRegister();
+    return;
+  }
+  
   if (points < pointsCost) {
-    alert(`❌ Not enough points!\n\nNeed: ${pointsCost} points (₹${cashValue})\nHave: ${points} points (₹${(points/100).toFixed(2)})\n\nEarn more:\n• Spin wheel\n• Refer friends (₹50 each)\n• Play MPL/WinZO`);
+    alert(`❌ Not enough points!\n\nNeed: ${pointsCost} (₹${cashValue})\nHave: ${points} (₹${(points/100).toFixed(2)})\n\nEarn more:\n• Spin wheel\n• Refer friends (₹50 each)`);
     return;
   }
   
@@ -398,24 +472,19 @@ function redeemReward(type, pointsCost, cashValue) {
   document.getElementById('redeemMessage').textContent = `₹${cashValue} ${type} redeemed!`;
   document.getElementById('paymentMethod').textContent = type;
   document.getElementById('paymentAmount').textContent = cashValue;
+  document.getElementById('paymentUPI').textContent = userData.upi || 'Not set';
   document.getElementById('redeemModal').classList.add('active');
   
   const redemptions = JSON.parse(localStorage.getItem('redemptions') || '[]');
   redemptions.push({
-    type: type,
-    amount: cashValue,
-    points: pointsCost,
-    date: new Date().toISOString(),
-    status: 'Pending'
+    type, amount: cashValue, points: pointsCost,
+    upi: userData.upi, mobile: userData.mobile, email: userData.email,
+    date: new Date().toISOString(), status: 'Pending'
   });
   localStorage.setItem('redemptions', JSON.stringify(redemptions));
 }
 
-function closeRedeemModal() {
-  document.getElementById('redeemModal').classList.remove('active');
-}
-
-// Check for referral
+// Check referral
 window.addEventListener('load', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const refId = urlParams.get('ref');
@@ -426,7 +495,7 @@ window.addEventListener('load', () => {
       earnings += 10;
       localStorage.setItem('hasReferred', 'true');
       updateUI();
-      alert('🎁 Welcome Bonus!\n\n✅ +1000 Points (₹10) added!\n\nYou were referred by a friend!\n\nStart playing & earning! 🎰');
+      alert('🎁 Welcome Bonus!\n\n✅ +1000 Points (₹10)!\n\nReferred by a friend!\n\nStart earning! 🎰');
     }
   }
 });
