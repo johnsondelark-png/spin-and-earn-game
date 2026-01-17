@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spin & Earn - Win Real Money Online</title>
+<meta name="monetag" content="4109dc8f2ad8fcc86ad8833f8f6b1549">
+<title>Spin & Earn - Win Real Money Online | Free Paytm Cash Game 2026</title>
+<meta name="description" content="Play Spin & Earn game and win real money! Earn Paytm cash, Amazon vouchers, mobile recharge. 100% FREE to play. No investment needed. Start earning today!">
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,14 +17,21 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 
 .container { max-width: 600px; margin: 20px auto; padding: 20px; }
 
-.alert-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
-.alert-box h3 { color: #856404; margin-bottom: 10px; }
+.alert-box { background: #e7f5ff; border-left: 4px solid #339af0; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+.alert-box h3 { color: #1971c2; margin-bottom: 10px; }
+.alert-box p { color: #1971c2; font-size: 14px; }
 
 .wheel-container { background: white; border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 20px; }
 .wheel { width: 300px; height: 300px; margin: 20px auto; position: relative; border-radius: 50%; border: 10px solid #ffd43b; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); }
 .wheel-segment { position: absolute; width: 50%; height: 50%; transform-origin: 100% 100%; clip-path: polygon(0 0, 100% 0, 100% 100%); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; color: white; }
 .pointer { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 40px solid #ff6b6b; z-index: 10; }
-.spin-btn { background: linear-gradient(135deg, #ff6b6b, #ff8787); color: white; border: none; padding: 15px 50px; font-size: 20px; font-weight: bold; border-radius: 50px; cursor: pointer; margin-top: 20px; }
+.spin-btn { background: linear-gradient(135deg, #ff6b6b, #ff8787); color: white; border: none; padding: 15px 50px; font-size: 20px; font-weight: bold; border-radius: 50px; cursor: pointer; margin-top: 20px; box-shadow: 0 5px 15px rgba(255,107,107,0.4); }
+.spin-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+.tasks { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
+.tasks h2 { margin-bottom: 15px; color: #333; }
+.task-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; border-radius: 10px; margin-bottom: 10px; }
+.task-btn { background: #51cf66; color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; }
 
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
 .modal.active { display: flex; }
@@ -32,6 +41,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 
 @media (max-width: 600px) {
   .wheel { width: 250px; height: 250px; }
+  .container { padding: 10px; }
 }
 </style>
 </head>
@@ -39,13 +49,13 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 
 <div class="header">
   <h1>🎰 Spin & Earn</h1>
-  <span class="points">⭐ <span id="points">0</span> Points</span>
+  <span class="points">⭐ <span id="points">1000</span> Points</span>
 </div>
 
 <div class="container">
   <div class="alert-box">
-    <h3>🚀 Beta Version - Local Storage Mode</h3>
-    <p>Firebase integration coming soon! Your progress is saved locally on this device.</p>
+    <h3>💰 Earn Real Money!</h3>
+    <p>Play games, complete tasks, and redeem rewards. Support us by viewing ads - it helps keep the game FREE for everyone!</p>
   </div>
 
   <div class="wheel-container">
@@ -66,6 +76,31 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
     <button class="spin-btn" id="spinBtn" onclick="spin()">SPIN NOW!</button>
     <div style="margin-top: 15px; color: #666;">Free Spins: <strong><span id="spinsLeft">5</span></strong></div>
   </div>
+
+  <div class="tasks">
+    <h2>🎯 Earn More Points</h2>
+    <div class="task-item">
+      <div>
+        <strong>Watch Rewarded Ad</strong><br>
+        <small>+100 Points (Supports us!)</small>
+      </div>
+      <button class="task-btn" onclick="watchAd()">Watch</button>
+    </div>
+    <div class="task-item">
+      <div>
+        <strong>Share with Friends</strong><br>
+        <small>+500 Points</small>
+      </div>
+      <button class="task-btn" onclick="shareGame()">Share</button>
+    </div>
+    <div class="task-item">
+      <div>
+        <strong>Daily Check-in</strong><br>
+        <small>+300 Points + 3 Spins</small>
+      </div>
+      <button class="task-btn" id="checkinBtn" onclick="dailyCheckin()">Claim</button>
+    </div>
+  </div>
 </div>
 
 <div class="modal" id="winModal">
@@ -80,6 +115,7 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 let points = parseInt(localStorage.getItem('points') || '1000');
 let spinsLeft = parseInt(localStorage.getItem('spinsLeft') || '5');
 let spinning = false;
+let adShownCount = parseInt(localStorage.getItem('adShownCount') || '0');
 const prizes = [1000, 50, 200, 500, 100, 20, 150, 300];
 
 function updateUI() {
@@ -89,9 +125,20 @@ function updateUI() {
   localStorage.setItem('spinsLeft', spinsLeft);
 }
 
+function showMonetizationAd() {
+  // Show ad every 3rd spin to balance user experience and monetization
+  adShownCount++;
+  localStorage.setItem('adShownCount', adShownCount);
+  
+  if (adShownCount % 3 === 0) {
+    // Open Monetag SmartLink in new window
+    window.open('https://otieu.com/4/10456383', '_blank');
+  }
+}
+
 function spin() {
   if (spinning || spinsLeft <= 0) {
-    alert('❌ No spins left! Share with friends to earn more spins.');
+    alert('❌ No spins left! Complete tasks to earn more spins.');
     return;
   }
   
@@ -104,6 +151,9 @@ function spin() {
   const degrees = 360 * 5 + (randomSpin * 45);
   
   wheel.style.transform = `rotate(${degrees}deg)`;
+  
+  // Show monetization ad
+  showMonetizationAd();
   
   setTimeout(() => {
     const wonPoints = prizes[randomSpin];
@@ -122,6 +172,46 @@ function spin() {
 
 function closeModal() {
   document.getElementById('winModal').classList.remove('active');
+}
+
+function watchAd() {
+  // Open ad in new window
+  window.open('https://otieu.com/4/10456383', '_blank');
+  
+  setTimeout(() => {
+    points += 100;
+    updateUI();
+    alert('✅ +100 Points earned!\n\nThank you for supporting us! 🙏');
+  }, 1000);
+}
+
+function shareGame() {
+  const shareText = `🎰 Play Spin & Earn - Win Real Money!\n\n✅ FREE to play\n✅ Earn points & redeem rewards\n✅ Daily bonuses\n\nPlay now: https://johnsondelark-png.github.io/spin-and-earn-game/`;
+  
+  if (navigator.share) {
+    navigator.share({ 
+      title: 'Spin & Earn',
+      text: shareText 
+    }).then(() => {
+      points += 500;
+      updateUI();
+      alert('✅ +500 Points for sharing!');
+    });
+  } else {
+    alert(`📱 Share this:\n\n${shareText}`);
+    points += 500;
+    updateUI();
+  }
+}
+
+function dailyCheckin() {
+  points += 300;
+  spinsLeft += 3;
+  document.getElementById('checkinBtn').disabled = true;
+  document.getElementById('checkinBtn').textContent = 'Claimed!';
+  document.getElementById('checkinBtn').style.background = '#ccc';
+  updateUI();
+  alert('✅ Daily Check-in Bonus!\n\n+300 Points\n+3 Free Spins');
 }
 
 updateUI();
